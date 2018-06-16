@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DB59A8A20D49FBB0014F2A6 /* Tienda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB59A8920D49FBB0014F2A6 /* Tienda.swift */; };
 		3DEAE5B920D477300085E82C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE5B820D477300085E82C /* AppDelegate.swift */; };
 		3DEAE5BB20D477300085E82C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE5BA20D477300085E82C /* ViewController.swift */; };
 		3DEAE5BE20D477300085E82C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE5BC20D477300085E82C /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3DB59A8920D49FBB0014F2A6 /* Tienda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tienda.swift; sourceTree = "<group>"; };
 		3DEAE5B520D477300085E82C /* Find It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DEAE5B820D477300085E82C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DEAE5BA20D477300085E82C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DB59A8820D49F8D0014F2A6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3DB59A8920D49FBB0014F2A6 /* Tienda.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3DEAE5AC20D4772F0085E82C = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +64,7 @@
 		3DEAE5B720D477300085E82C /* Find It */ = {
 			isa = PBXGroup;
 			children = (
+				3DB59A8820D49F8D0014F2A6 /* Models */,
 				3DEAE5CC20D47BB60085E82C /* Controllers */,
 				3DEAE5B820D477300085E82C /* AppDelegate.swift */,
 				3DEAE5BC20D477300085E82C /* Main.storyboard */,
@@ -144,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DEAE5BB20D477300085E82C /* ViewController.swift in Sources */,
+				3DB59A8A20D49FBB0014F2A6 /* Tienda.swift in Sources */,
 				3DEAE5B920D477300085E82C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

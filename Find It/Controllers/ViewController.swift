@@ -22,7 +22,9 @@ class ViewController: UIViewController {
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if data != nil {
                 print("Datos no vacios")
-                print(data!)
+                let decoder = JSONDecoder()
+                let tiendaDatos = try! decoder.decode(Tienda.self, from: data!)
+                print(tiendaDatos)
                 print(response!)
                 
             }else{
