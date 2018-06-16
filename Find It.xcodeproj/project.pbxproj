@@ -54,14 +54,22 @@
 		3DEAE5B720D477300085E82C /* Find It */ = {
 			isa = PBXGroup;
 			children = (
+				3DEAE5CC20D47BB60085E82C /* Controllers */,
 				3DEAE5B820D477300085E82C /* AppDelegate.swift */,
-				3DEAE5BA20D477300085E82C /* ViewController.swift */,
 				3DEAE5BC20D477300085E82C /* Main.storyboard */,
 				3DEAE5BF20D477300085E82C /* Assets.xcassets */,
 				3DEAE5C120D477300085E82C /* LaunchScreen.storyboard */,
 				3DEAE5C420D477300085E82C /* Info.plist */,
 			);
 			path = "Find It";
+			sourceTree = "<group>";
+		};
+		3DEAE5CC20D47BB60085E82C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3DEAE5BA20D477300085E82C /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
