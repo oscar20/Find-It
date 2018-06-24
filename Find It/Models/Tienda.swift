@@ -8,15 +8,20 @@
 
 import Foundation
 
-struct Tienda: Codable {
-    let address: String
-    let city: String
-    let id: String
-    let lat: Double
-    let lng: Double
-    let name: String
-    let phone: String
-    let state: String
-    let store_id: String
-    let zipCode: String
+struct Tienda: Decodable {
+    let location: Location
+    let status: String
+}
+
+struct Location: Decodable{
+     let address: String
+     let city: String
+     let id: String
+     let lat: Double
+     let lng: Double
+     let name: String
+     let phone: String
+     let state: String
+     let store_id: String
+     let zipcode: String
 }
