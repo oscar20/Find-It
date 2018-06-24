@@ -36,21 +36,22 @@ class ViewController: UIViewController {
     }
     
     @objc func recuperaDatos(){
-        print("recuperando datos.....")
-        let urlString = "https://api.goodzer.com/products/v0.1/location_details/?locationId=ffy5Pc7R&apiKey=4ee7cdf8c6a05e6f91f8077f3bd003ba"
+        print("Func recuperaDatos")
+        let apiKey = "4ee7cdf8c6a05e6f91f8077f3bd003ba"
+        let urlString = "https://api.goodzer.com/products/v0.1/location_details/?locationId=ffy5Pc7R&apiKey=\(apiKey)"
         let url = URL(string: urlString)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            print("Recuperando datos...")
-        
+            print("Fetching data...")
             guard let data = data else {return}
-            
-        /*let datosRecuperados = String(data: data, encoding: .utf8)
-        print(datosRecuperados)*/
             
         //Parseo de Json
             do {
                 let tienda = try JSONDecoder().decode(Tienda.self, from: data)
-                print(tienda.status)
+                print("Status de peticion...\(tienda.status)")
+                print("Address: \(tienda.location.address)")
+                print("City: \(tienda.location.city)")
+                print("Latitud: \(tienda.location.lat)")
+                print("Longitud: \(tienda.location.lng)")
             }catch let error{
                 print("Error:", error)
             }
