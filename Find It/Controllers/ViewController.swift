@@ -45,14 +45,14 @@ class ViewController: UIViewController,UITextFieldDelegate {
     
     let labelLatitud: UILabel = {
        let labelLat = UILabel()
-        labelLat.text = "Latitud"
+        labelLat.text = "40.714353"
         labelLat.translatesAutoresizingMaskIntoConstraints = false
         return labelLat
     }()
     
     let labelLongitud: UILabel = {
        let labelLong = UILabel()
-        labelLong.text = "Longitud"
+        labelLong.text = "-74.005973"
         labelLong.translatesAutoresizingMaskIntoConstraints = false
         return labelLong
     }()
@@ -94,13 +94,11 @@ class ViewController: UIViewController,UITextFieldDelegate {
             print("Empty string...")
         }else{
             print("The parameter is:\(formattingText).")
-            let latitud = "40.714353"
-            let longitud = "-74.005973"
+            //let latitud = "40.714353"
+            //let longitud = "-74.005973"
             let apiKey = ""
-            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=\(latitud)&lng=\(longitud)&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
+            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=\(labelLatitud.text!)&lng=\(labelLongitud.text!)&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
             let url = URL(string: urlString) //Ejecuto mi peticion
-            labelLatitud.text = latitud
-            labelLongitud.text = longitud
             URLSession.shared.dataTask(with: url!) { (data, response, error) in
                 print("Getting stores...")
                 guard let data = data else {return}
