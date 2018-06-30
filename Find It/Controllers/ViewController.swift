@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController,UITextFieldDelegate {
+class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDelegate {
     
+    //******Crear coordenadas
     
+    let myLocation = CLLocation(latitude: 40.714353, longitude: -74.005973)
+    let location = CLLocationManager()
+
+    //************
     
     let productLabel : UILabel = {
         let lbl = UILabel()
@@ -45,14 +51,14 @@ class ViewController: UIViewController,UITextFieldDelegate {
     
     let labelLatitud: UILabel = {
        let labelLat = UILabel()
-        labelLat.text = "40.714353"
+        labelLat.text = "???"//40.714353
         labelLat.translatesAutoresizingMaskIntoConstraints = false
         return labelLat
     }()
     
     let labelLongitud: UILabel = {
        let labelLong = UILabel()
-        labelLong.text = "-74.005973"
+        labelLong.text = "???"//-74.005973
         labelLong.translatesAutoresizingMaskIntoConstraints = false
         return labelLong
     }()
@@ -61,6 +67,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         self.parametro.delegate = self
         view.backgroundColor = UIColor.white
+        
         view.addSubview(registerButton)
         view.addSubview(parametro)
         view.addSubview(productLabel)
@@ -87,6 +94,12 @@ class ViewController: UIViewController,UITextFieldDelegate {
     
     @objc func getStores(){
         print("Running getStores...")
+        getLocation()
+        
+        let latitud = myLocation.coordinate.latitude
+        let longitud = myLocation.coordinate.longitude
+        print("Tu coordenada de latitud es: \(latitud) y longitud: \(longitud)")
+        
         guard let textTextField = parametro.text else {return}//Valido que mi TextField contenga una cadena.
         let textTextField_trimmed  = textTextField.trimmingCharacters(in: .whitespaces) //Recorto la cadena.
         let formattingText = textTextField_trimmed.replacingOccurrences(of: " ", with: "+") //Reemplazando espacios en blanco.
@@ -94,10 +107,11 @@ class ViewController: UIViewController,UITextFieldDelegate {
             print("Empty string...")
         }else{
             print("The parameter is:\(formattingText).")
-            //let latitud = "40.714353"
+            //let latitud = myLocation.latitud
+            //let longitud = myLocation.
             //let longitud = "-74.005973"
-            let apiKey = ""
-            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=\(labelLatitud.text!)&lng=\(labelLongitud.text!)&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
+            let apiKey = "4ee7cdf8c6a05e6f91f8077f3bd003ba"
+            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=\(latitud)&lng=\(longitud)&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
             let url = URL(string: urlString) //Ejecuto mi peticion
             URLSession.shared.dataTask(with: url!) { (data, response, error) in
                 print("Getting stores...")
@@ -129,6 +143,27 @@ class ViewController: UIViewController,UITextFieldDelegate {
         parametro.resignFirstResponder() //Renuncia a tu estado de primera ventana.
         return true
     }
+    
+    //Funcion que determina la ubicacion actual del usuario******
+    func getLocation() {
+        location.delegate = self
+        location.requestWhenInUseAuthorization()
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let lat = locations.last?.coordinate.latitude, let long = locations.last?.coordinate.longitude {
+            print("\(lat),\(long)")
+        } else {
+            print("No coordinates")
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    //**********
+    
     
     
     /*@objc func recuperaDatos(){
