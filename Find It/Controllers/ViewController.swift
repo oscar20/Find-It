@@ -12,7 +12,7 @@ import CoreLocation
 class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDelegate {
     
     //******Crear coordenadas
-    
+    //Agregando coordenadas
     let myLocation = CLLocation(latitude: 40.714353, longitude: -74.005973)
     let location = CLLocationManager()
 
