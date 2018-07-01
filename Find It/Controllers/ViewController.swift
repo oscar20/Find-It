@@ -11,11 +11,11 @@ import CoreLocation
 
 class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDelegate {
     
-    //******Crear coordenadas
+    let peticion = Peticion() //variable para hacer la peticion a mi API
+    let managerUbication = CLLocationManager()
+    
     //Agregando coordenadas
     let myLocation = CLLocation(latitude: 40.714353, longitude: -74.005973)
-    let location = CLLocationManager()
-
     //************
     
     let productLabel : UILabel = {
@@ -40,7 +40,7 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         
     }()
     
-    let parametro: UITextField = {
+    let parametroProducto: UITextField = {
         let p = UITextField()
         p.text = "v-neck+sweater"
         p.backgroundColor = UIColor.yellow
@@ -65,11 +65,20 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.parametro.delegate = self
-        view.backgroundColor = UIColor.white
+        managerUbication.delegate = self
+        managerUbication.desiredAccuracy = kCLLocationAccuracyBest
+        managerUbication.requestWhenInUseAuthorization()
+        managerUbication.startUpdatingLocation()
+        setupLayout()
         
+        
+    }
+    
+    func setupLayout() {
+        self.parametroProducto.delegate = self
+        view.backgroundColor = UIColor.white
         view.addSubview(registerButton)
-        view.addSubview(parametro)
+        view.addSubview(parametroProducto)
         view.addSubview(productLabel)
         view.addSubview(labelLatitud)
         view.addSubview(labelLongitud)
@@ -77,10 +86,10 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         productLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
         
-        parametro.topAnchor.constraint(equalTo: productLabel.bottomAnchor, constant: 30).isActive = true
-        parametro.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        parametroProducto.topAnchor.constraint(equalTo: productLabel.bottomAnchor, constant: 30).isActive = true
+        parametroProducto.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        registerButton.topAnchor.constraint(equalTo: parametro.bottomAnchor, constant: 30).isActive = true
+        registerButton.topAnchor.constraint(equalTo: parametroProducto.bottomAnchor, constant: 30).isActive = true
         registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         labelLatitud.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -88,109 +97,30 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         
         labelLongitud.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         labelLongitud.topAnchor.constraint(equalTo: labelLatitud.bottomAnchor, constant: 30).isActive = true
-        
     }
     
     
     @objc func getStores(){
-        print("Running getStores...")
-        getLocation()
-        
-        let latitud = myLocation.coordinate.latitude
-        let longitud = myLocation.coordinate.longitude
-        print("Tu coordenada de latitud es: \(latitud) y longitud: \(longitud)")
-        
-        guard let textTextField = parametro.text else {return}//Valido que mi TextField contenga una cadena.
-        let textTextField_trimmed  = textTextField.trimmingCharacters(in: .whitespaces) //Recorto la cadena.
-        let formattingText = textTextField_trimmed.replacingOccurrences(of: " ", with: "+") //Reemplazando espacios en blanco.
-        if formattingText.isEmpty{
-            print("Empty string...")
-        }else{
-            print("The parameter is:\(formattingText).")
-            //let latitud = myLocation.latitud
-            //let longitud = myLocation.
-            //let longitud = "-74.005973"
-            let apiKey = "4ee7cdf8c6a05e6f91f8077f3bd003ba"
-            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=\(latitud)&lng=\(longitud)&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
-            let url = URL(string: urlString) //Ejecuto mi peticion
-            URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                print("Getting stores...")
-                guard let data = data else {return}
-                //Parseo...
-                do{
-                    let productStore = try JSONDecoder().decode(PeticionProducto.self, from: data)
-                    if productStore.stores_found == nil || productStore.stores_found! == 0 {
-                        print("No se encontro ninguna tienda con el producto")
-                    }else{
-                        print("Status: \(String(describing: productStore.status))")
-                        print("WebSite de primer tienda: \(String(describing: productStore.stores?.first?.website))")
-                        print("Stores_found: \(String(describing: productStore.stores_found))")
-                        print("Time: \(String(describing: productStore.time))")
-                    }
-                }catch let error{
-                    print("Error: ", error)
-                }
-            }.resume()
-        }
+        peticion.getStores(latitud: myLocation.coordinate.latitude, longitud: myLocation.coordinate.longitude, parametroProducto: parametroProducto)
     }
     
-    //Dismiss keyboard
+    //Inicia dismiss keyboard..
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        parametro.resignFirstResponder() //Renuncia a tu estado de primera ventana.
+        parametroProducto.resignFirstResponder() //Renuncia a tu estado de primera ventana.
         return true
     }
+    //Termina dismiss keyboard..
     
-    //Funcion que determina la ubicacion actual del usuario******
-    func getLocation() {
-        location.delegate = self
-        location.requestWhenInUseAuthorization()
-        
-    }
+    //Implementando Ubicacion
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let lat = locations.last?.coordinate.latitude, let long = locations.last?.coordinate.longitude {
-            print("\(lat),\(long)")
-        } else {
-            print("No coordinates")
-        }
-    }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        let location = locations[0]
+        print("Latitud: \(location.coordinate.latitude) longitud: \(location.coordinate.longitude)")
     }
     
-    //**********
-    
-    
-    
-    /*@objc func recuperaDatos(){
-     print("Func recuperaDatos")
-     let apiKey = ""
-     let urlString = "https://api.goodzer.com/products/v0.1/location_details/?locationId=\(String(describing: parametro.text!))&apiKey=\(apiKey)"
-     let url = URL(string: urlString)
-     URLSession.shared.dataTask(with: url!) { (data, response, error) in
-     print("Fetching data...")
-     guard let data = data else {return}
-     
-     //Parseo de Json
-     do {
-     let store = try JSONDecoder().decode(Store.self, from: data)
-     print("Status de peticion...\(String(describing: store.status))")
-     print("Address: \(String(describing: store.location?.address))")
-     print("City: \(String(describing: store.location?.city))")
-     print("Latitud: \(String(describing: store.location?.lat))")
-     print("Longitud: \(String(describing: store.location?.lng))")
-     }catch let error{
-     print("Error:", error)
-     }
-     
-     
-     }.resume()
-     
-     }
-     */
 }
 
