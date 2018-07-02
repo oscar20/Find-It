@@ -13,6 +13,8 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
     
     let peticion = Peticion() //variable para hacer la peticion a mi API
     let managerUbication = CLLocationManager()
+    var locationOscar = CLLocation()
+    
     
     //Agregando coordenadas
     let myLocation = CLLocation(latitude: 40.714353, longitude: -74.005973)
@@ -51,14 +53,14 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
     
     let labelLatitud: UILabel = {
        let labelLat = UILabel()
-        labelLat.text = "???"//40.714353
+        labelLat.text = "0.0"//40.714353
         labelLat.translatesAutoresizingMaskIntoConstraints = false
         return labelLat
     }()
     
     let labelLongitud: UILabel = {
        let labelLong = UILabel()
-        labelLong.text = "???"//-74.005973
+        labelLong.text = "0.0"//-74.005973
         labelLong.translatesAutoresizingMaskIntoConstraints = false
         return labelLong
     }()
@@ -70,8 +72,6 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         managerUbication.requestWhenInUseAuthorization()
         managerUbication.startUpdatingLocation()
         setupLayout()
-        
-        
     }
     
     func setupLayout() {
@@ -101,7 +101,7 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
     
     
     @objc func getStores(){
-        peticion.getStores(latitud: myLocation.coordinate.latitude, longitud: myLocation.coordinate.longitude, parametroProducto: parametroProducto)
+        peticion.getStores(latitud: locationOscar.coordinate.latitude, longitud: locationOscar.coordinate.longitude, parametroProducto: parametroProducto)
     }
     
     //Inicia dismiss keyboard..
@@ -116,10 +116,12 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
     //Termina dismiss keyboard..
     
     //Implementando Ubicacion
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations[0]
-        print("Latitud: \(location.coordinate.latitude) longitud: \(location.coordinate.longitude)")
+   
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        locationOscar = locations[0]
+        labelLatitud.text = String(format: "%f", locationOscar.coordinate.latitude)
+        labelLongitud.text = String(format: "%f", locationOscar.coordinate.longitude)
+        print("Latitud: \(locationOscar.coordinate.latitude) longitud: \(locationOscar.coordinate.longitude)")
     }
     
 }
