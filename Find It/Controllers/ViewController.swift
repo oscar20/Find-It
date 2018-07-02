@@ -17,7 +17,9 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
     
     
     //Agregando coordenadas
-    let myLocation = CLLocation(latitude: 40.714353, longitude: -74.005973)
+    let EUlocation = CLLocation(latitude: 40.71435323, longitude: -74.00597345)
+    var difLatitud : Double = 0.0
+    var difLongitud : Double = 0.0
     //************
     
     let productLabel : UILabel = {
@@ -101,7 +103,11 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
     
     
     @objc func getStores(){
-        peticion.getStores(latitud: locationOscar.coordinate.latitude, longitud: locationOscar.coordinate.longitude, parametroProducto: parametroProducto)
+        if locationOscar.coordinate.latitude != 0.0 || locationOscar.coordinate.longitude != 0.0 {
+            peticion.getStores(latitud: locationOscar.coordinate.latitude, longitud: locationOscar.coordinate.longitude, parametroProducto: parametroProducto)
+        }else{
+            print("No se puede enviar la peticion con coordenadas de 0.0")
+        }
     }
     
     //Inicia dismiss keyboard..
@@ -119,9 +125,20 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         locationOscar = locations[0]
-        labelLatitud.text = String(format: "%f", locationOscar.coordinate.latitude)
-        labelLongitud.text = String(format: "%f", locationOscar.coordinate.longitude)
-        print("Latitud: \(locationOscar.coordinate.latitude) longitud: \(locationOscar.coordinate.longitude)")
+        difLatitud = EUlocation.coordinate.latitude - locationOscar.coordinate.latitude
+        difLongitud = EUlocation.coordinate.longitude - locationOscar.coordinate.longitude
+        
+        let sumaLatitud : Double = locationOscar.coordinate.latitude + difLatitud
+        let sumaLongitud : Double = locationOscar.coordinate.longitude + difLongitud
+        
+        labelLatitud.text = String(format: "%.6f", sumaLatitud) //String(format: "%f", locationOscar.coordinate.latitude)
+        labelLongitud.text = String(sumaLongitud) //String(format: "%f", locationOscar.coordinate.longitude)
+        //print("Latitud: \(locationOscar.coordinate.latitude) longitud: \(locationOscar.coordinate.longitude)")
+        //print("Suma de latitudes y longitudes: \(sumaLatitud) : \(sumaLongitud)")
+        //print("La diferencia de latitud es: \(difLatitud) y la diferencia de longitud es: \(difLongitud)")
+        print("Latitud: \(locationOscar.coordinate.latitude)")
+        print("Diferencia: \(difLatitud)")
+        print("Suma: \(sumaLatitud)")
     }
     
 }

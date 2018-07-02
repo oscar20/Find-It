@@ -11,7 +11,7 @@ import UIKit
 
 class Peticion{
     
-    final let apiKey = ""
+    final let apiKey = "4ee7cdf8c6a05e6f91f8077f3bd003ba"
     
     func getStores(latitud: Double, longitud: Double, parametroProducto : UITextField ) {
         print("Running getStores...")
