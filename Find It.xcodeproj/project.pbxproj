@@ -11,31 +11,36 @@
 		3DEAE5B920D477300085E82C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE5B820D477300085E82C /* AppDelegate.swift */; };
 		3DEAE5BB20D477300085E82C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE5BA20D477300085E82C /* ViewController.swift */; };
 		3DEAE5BE20D477300085E82C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE5BC20D477300085E82C /* Main.storyboard */; };
-		3DEAE5C020D477300085E82C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE5BF20D477300085E82C /* Assets.xcassets */; };
 		3DEAE5C320D477300085E82C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE5C120D477300085E82C /* LaunchScreen.storyboard */; };
+		4232BD19E7E6F9531094CFE4 /* Pods_Find_It.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E738CF9632A2F4CC38BBA899 /* Pods_Find_It.framework */; };
 		BA08C39F20E9641800FF6FBD /* Peticion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08C39E20E9641800FF6FBD /* Peticion.swift */; };
 		BA08C3A220E96CF900FF6FBD /* Ubicacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08C3A120E96CF900FF6FBD /* Ubicacion.swift */; };
 		BA47D21F20E0730400088350 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47D21E20E0730400088350 /* Location.swift */; };
 		BA47D22120E0735300088350 /* ProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47D22020E0735300088350 /* ProductStore.swift */; };
 		BA47D22320E0747300088350 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47D22220E0747300088350 /* Product.swift */; };
 		BA47D22520E0764000088350 /* PeticionProducto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47D22420E0764000088350 /* PeticionProducto.swift */; };
+		BAE6871C20F171E100059B43 /* resultadosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE6871B20F171E100059B43 /* resultadosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1464F8F5E049F6591557974B /* Pods-Find It.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find It.release.xcconfig"; path = "Pods/Target Support Files/Pods-Find It/Pods-Find It.release.xcconfig"; sourceTree = "<group>"; };
 		3DB59A8920D49FBB0014F2A6 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		3DEAE5B520D477300085E82C /* Find It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DEAE5B820D477300085E82C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DEAE5BA20D477300085E82C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3DEAE5BD20D477300085E82C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3DEAE5BF20D477300085E82C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DEAE5C220D477300085E82C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DEAE5C420D477300085E82C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6567BEDD71C0B2FDABD3374C /* Pods-Find It.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find It.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Find It/Pods-Find It.debug.xcconfig"; sourceTree = "<group>"; };
 		BA08C39E20E9641800FF6FBD /* Peticion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peticion.swift; sourceTree = "<group>"; };
 		BA08C3A120E96CF900FF6FBD /* Ubicacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ubicacion.swift; sourceTree = "<group>"; };
 		BA47D21E20E0730400088350 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		BA47D22020E0735300088350 /* ProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
 		BA47D22220E0747300088350 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		BA47D22420E0764000088350 /* PeticionProducto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeticionProducto.swift; sourceTree = "<group>"; };
+		BAE6871620F1671A00059B43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/oscaralmazanlora/Documents/Diplomado/ProyectoFinal/Find-It/Find It/Assets.xcassets"; sourceTree = "<absolute>"; };
+		BAE6871B20F171E100059B43 /* resultadosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = resultadosViewController.swift; path = "/Users/oscaralmazanlora/Documents/Diplomado/ProyectoFinal/Find-It/Find It/Controllers/resultadosViewController.swift"; sourceTree = "<absolute>"; };
+		E738CF9632A2F4CC38BBA899 /* Pods_Find_It.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_It.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4232BD19E7E6F9531094CFE4 /* Pods_Find_It.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +72,8 @@
 			children = (
 				3DEAE5B720D477300085E82C /* Find It */,
 				3DEAE5B620D477300085E82C /* Products */,
+				5A095493E0262A79D9EF418C /* Pods */,
+				AD7C075AF58A55DBFD292332 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,7 +93,7 @@
 				3DEAE5CC20D47BB60085E82C /* Controllers */,
 				3DEAE5B820D477300085E82C /* AppDelegate.swift */,
 				3DEAE5BC20D477300085E82C /* Main.storyboard */,
-				3DEAE5BF20D477300085E82C /* Assets.xcassets */,
+				BAE6871620F1671A00059B43 /* Assets.xcassets */,
 				3DEAE5C120D477300085E82C /* LaunchScreen.storyboard */,
 				3DEAE5C420D477300085E82C /* Info.plist */,
 			);
@@ -96,8 +104,26 @@
 			isa = PBXGroup;
 			children = (
 				3DEAE5BA20D477300085E82C /* ViewController.swift */,
+				BAE6871B20F171E100059B43 /* resultadosViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5A095493E0262A79D9EF418C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6567BEDD71C0B2FDABD3374C /* Pods-Find It.debug.xcconfig */,
+				1464F8F5E049F6591557974B /* Pods-Find It.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AD7C075AF58A55DBFD292332 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E738CF9632A2F4CC38BBA899 /* Pods_Find_It.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BA08C3A020E96B5400FF6FBD /* Clases */ = {
@@ -116,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DEAE5C720D477300085E82C /* Build configuration list for PBXNativeTarget "Find It" */;
 			buildPhases = (
+				9C471D92C98F314AE59EBC1D /* [CP] Check Pods Manifest.lock */,
 				3DEAE5B120D477300085E82C /* Sources */,
 				3DEAE5B220D477300085E82C /* Frameworks */,
 				3DEAE5B320D477300085E82C /* Resources */,
+				D6C94FEEDD1D003B680119DF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -168,12 +196,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DEAE5C320D477300085E82C /* LaunchScreen.storyboard in Resources */,
-				3DEAE5C020D477300085E82C /* Assets.xcassets in Resources */,
 				3DEAE5BE20D477300085E82C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9C471D92C98F314AE59EBC1D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Find It-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6C94FEEDD1D003B680119DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Find It/Pods-Find It-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Find It/Pods-Find It-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3DEAE5B120D477300085E82C /* Sources */ = {
@@ -187,6 +253,7 @@
 				BA08C39F20E9641800FF6FBD /* Peticion.swift in Sources */,
 				BA47D21F20E0730400088350 /* Location.swift in Sources */,
 				BA08C3A220E96CF900FF6FBD /* Ubicacion.swift in Sources */,
+				BAE6871C20F171E100059B43 /* resultadosViewController.swift in Sources */,
 				3DEAE5B920D477300085E82C /* AppDelegate.swift in Sources */,
 				BA47D22320E0747300088350 /* Product.swift in Sources */,
 			);
@@ -265,7 +332,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -319,7 +386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -330,10 +397,13 @@
 		};
 		3DEAE5C820D477300085E82C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6567BEDD71C0B2FDABD3374C /* Pods-Find It.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L2UZHG2X4B;
 				INFOPLIST_FILE = "Find It/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -347,10 +417,13 @@
 		};
 		3DEAE5C920D477300085E82C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1464F8F5E049F6591557974B /* Pods-Find It.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L2UZHG2X4B;
 				INFOPLIST_FILE = "Find It/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

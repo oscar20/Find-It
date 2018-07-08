@@ -11,10 +11,13 @@ import CoreLocation
 
 class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDelegate {
     
+    var result : String = "jjjj"
     let peticion = Peticion() //variable para hacer la peticion a mi API
     let managerUbication = CLLocationManager()
     var locationOscar = CLLocation()
-    
+    //Variable parciales para guardar la locacion temporal
+    var tempLatitud : Double = 0.0
+    var tempLongitud : Double = 0.0
     
     //Agregando coordenadas
     let EUlocation = CLLocation(latitude: 40.71435323, longitude: -74.00597345)
@@ -53,7 +56,7 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         return p
     }()
     
-    let labelLatitud: UILabel = {
+    /*let labelLatitud: UILabel = {
        let labelLat = UILabel()
         labelLat.text = "0.0"//40.714353
         labelLat.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +68,15 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         labelLong.text = "0.0"//-74.005973
         labelLong.translatesAutoresizingMaskIntoConstraints = false
         return labelLong
+    }()*/
+    
+    let labelUbicacion: UILabel = {
+        let ub = UILabel()
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.text = "Aqui voy a escribir mi ubicacion.."
+        ub.textColor = UIColor.white
+        ub.backgroundColor = UIColor.gray
+        return ub
     }()
     
     override func viewDidLoad() {
@@ -73,20 +85,36 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         managerUbication.desiredAccuracy = kCLLocationAccuracyBest
         managerUbication.requestWhenInUseAuthorization()
         managerUbication.startUpdatingLocation()
+        //managerUbication.distanceFilter = 1
+
+        
+        
+        //print("LATITUD INICIAL: \(managerUbication.location?.coordinate.latitude)")
+        //print("LONGITUD INICIAL: \(managerUbication.location?.coordinate.longitude)")
+        
         setupLayout()
     }
     
     func setupLayout() {
         self.parametroProducto.delegate = self
         view.backgroundColor = UIColor.white
+        view.addSubview(labelUbicacion)
         view.addSubview(registerButton)
         view.addSubview(parametroProducto)
         view.addSubview(productLabel)
-        view.addSubview(labelLatitud)
-        view.addSubview(labelLongitud)
         
-        productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        productLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
+        //view.addSubview(labelLatitud)
+        //view.addSubview(labelLongitud)
+        
+        //labelUbicacion.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10).isActive = true
+        //labelUbicacion.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10).isActive = true
+        labelUbicacion.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //labelUbicacion.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        labelUbicacion.topAnchor.constraint(equalTo: view.topAnchor,constant: 90).isActive = true
+        //labelUbicacion.widthAnchor.constraint(equalToConstant: 20).isActive = true
+
+        productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: 20).isActive = true
+        productLabel.topAnchor.constraint(equalTo: labelUbicacion.bottomAnchor, constant: 100).isActive = true
         
         parametroProducto.topAnchor.constraint(equalTo: productLabel.bottomAnchor, constant: 30).isActive = true
         parametroProducto.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -94,17 +122,19 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         registerButton.topAnchor.constraint(equalTo: parametroProducto.bottomAnchor, constant: 30).isActive = true
         registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        labelLatitud.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        labelLatitud.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 30).isActive = true
         
-        labelLongitud.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        labelLongitud.topAnchor.constraint(equalTo: labelLatitud.bottomAnchor, constant: 30).isActive = true
+        //labelLatitud.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //labelLatitud.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 30).isActive = true
+        
+        //labelLongitud.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //labelLongitud.topAnchor.constraint(equalTo: labelLatitud.bottomAnchor, constant: 30).isActive = true
     }
     
     
     @objc func getStores(){
         if locationOscar.coordinate.latitude != 0.0 || locationOscar.coordinate.longitude != 0.0 {
-            peticion.getStores(latitud: locationOscar.coordinate.latitude, longitud: locationOscar.coordinate.longitude, parametroProducto: parametroProducto)
+            peticion.getStoresAlamo(latitud: locationOscar.coordinate.latitude, longitud: locationOscar.coordinate.longitude, parametroProducto: parametroProducto)
+            performSegue(withIdentifier: "segue", sender: self)
         }else{
             print("No se puede enviar la peticion con coordenadas de 0.0")
         }
@@ -125,7 +155,17 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         locationOscar = locations[0]
-        difLatitud = EUlocation.coordinate.latitude - locationOscar.coordinate.latitude
+        print("LATITUD DE LOCATION MANAGER: \(managerUbication.location?.coordinate.latitude)")
+        print("LONGITUD DE LOCATION MANAGER: \(managerUbication.location?.coordinate.longitude)")
+        //let locationLatitud = locationOscar.coordinate.latitude
+        //let locationLongitud = locationOscar.coordinate.longitude
+        tempLatitud = locationOscar.coordinate.latitude
+        tempLongitud = locationOscar.coordinate.longitude
+        print("LATITUD EN DIDUPDATE: \(tempLatitud)")
+        print("LONGITUD EN DIDUPDATE: \(tempLongitud)")
+        
+        //actualizaCoordenadas(latitudActual: locationLatitud,longitudActual: locationLongitud)
+        /*difLatitud = EUlocation.coordinate.latitude - locationOscar.coordinate.latitude
         difLongitud = EUlocation.coordinate.longitude - locationOscar.coordinate.longitude
         
         let sumaLatitud : Double = locationOscar.coordinate.latitude + difLatitud
@@ -138,7 +178,21 @@ class ViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDele
         //print("La diferencia de latitud es: \(difLatitud) y la diferencia de longitud es: \(difLongitud)")
         print("Latitud: \(locationOscar.coordinate.latitude)")
         print("Diferencia: \(difLatitud)")
-        print("Suma: \(sumaLatitud)")
+        print("Suma: \(sumaLatitud)")*/
+    }
+    
+    func actualizaCoordenadas(latitudActual: Double, longitudActual: Double){
+        print("LAT ACTUAL: \(latitudActual) LONG ACTUAL: \(longitudActual)")
+        print("TEMP LAT: \(tempLatitud) TEMP LONG: \(tempLongitud)")
+        /*let diferenciaLatitudes = latitudActual - tempLatitud
+        let diferenciaLongitudes = longitudActual - tempLongitud
+        print("Diferencia de latitud:\(diferenciaLatitudes), longitudes: \(diferenciaLongitudes)")
+        print("EULOCATION LATITUD: \(Double(EUlocation.coordinate.latitude) + diferenciaLatitudes)")*/
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let resultadosViewController = segue.destination as! resultadosViewController
+        resultadosViewController.labelSecondController.text = result
     }
     
 }

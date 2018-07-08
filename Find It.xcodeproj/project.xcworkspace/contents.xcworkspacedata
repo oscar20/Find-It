@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/oscaralmazanlora/Documents/Diplomado/ProyectoFinal/Find-It/Find It/Controllers/resultadosViewController.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/oscaralmazanlora/Documents/Diplomado/ProyectoFinal/Find-It/Find It/Assets.xcassets">
+   </FileRef>
+   <FileRef
       location = "self:Find It.xcodeproj">
    </FileRef>
 </Workspace>
