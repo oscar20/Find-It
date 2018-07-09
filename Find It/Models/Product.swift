@@ -9,7 +9,7 @@
 import Foundation
 
 struct Product: Decodable{
-    let id: Int?
+    let id: CLongLong?
     let image: String?
     let original_price: Double?
     let price: Double?

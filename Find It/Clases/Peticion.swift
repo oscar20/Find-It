@@ -105,7 +105,6 @@ class Peticion{
                     }
                 }
         }
-            
         print("ELEMENTOS ARRAY: \(productsName.count)")
 
     }
