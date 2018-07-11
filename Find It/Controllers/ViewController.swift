@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import Alamofire
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, CLLocationManagerDelegate,UISearchBarDelegate {
+class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, CLLocationManagerDelegate,UISearchBarDelegate {
     
     //......Elementos de vista......//
     let productLabel : UILabel = {
@@ -21,8 +21,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }()
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet var collectionView: UICollectionView!
     
-    @IBOutlet var miTableView: UITableView!
     /*let parametroProducto: UITextField = {
         let p = UITextField()
         p.text = "v-neck+sweater"
@@ -50,9 +50,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     //.................Variable...............//
     let peticion = Peticion() //variable para hacer la peticion a mi API
-    final let apiKey = "4ee7cdf8c6a05e6f91f8077f3bd003ba"
+    final let apiKey = ""
     let identificadorCell = "rowID"
-    var storeArray : [String] = []
+    var storeArray : [ProductStore] = []
 
     var result : String = "jjjj"
     let managerUbication = CLLocationManager()
@@ -96,14 +96,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         managerUbicationSetup()
         searchBarSetup()
         setupLayout()
-        setupTableView()
+        setupCollectionView()
 
     }
     
-    func setupTableView() {
-        miTableView.delegate = self
-        miTableView.dataSource = self
-        miTableView.register(UITableViewCell.self, forCellReuseIdentifier: identificadorCell)
+    func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     
@@ -151,8 +150,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let formattingText = textSearchBar_trimmed.replacingOccurrences(of: " ", with: "+") //Reemplazando espacios en blanco.
         if formattingText.isEmpty{
             print("Empty string...")
-            storeArray = ["No se encontraron elementos..."]
-            self.miTableView.reloadData()
+            storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: nil, products_found: nil, realtime_availability: nil, website: "Sin website")]
+            self.collectionView.reloadData()
         }else{
             let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
             let url = URL(string: urlString)
@@ -165,14 +164,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 do{
                     let peticionProducto = try JSONDecoder().decode(PeticionProducto.self, from: data)
                     if peticionProducto.stores_found == 0 || peticionProducto.stores_found == nil{
-                        self.storeArray = ["No se encontraron elementos..."]
-                        self.miTableView.reloadData()
+                        self.storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: nil, products_found: nil, realtime_availability: nil, website: "Sin website")]
+                        self.collectionView.reloadData()
                     }else{
                         print("Results", peticionProducto.status!)
                         peticionProducto.stores?.forEach({ (store) in
                             print("NAME:\(store.name!)\n")
-                            self.storeArray.append(store.name!)
-                            self.miTableView.reloadData()
+                            self.storeArray.append(store)
+                            self.collectionView.reloadData()
                             /*store.products?.forEach({ (producto) in
                                 print("URL:\(producto.url!)")
                             })*/
@@ -196,25 +195,38 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     //.......Termina dismiss keyboard....//
     
-    //.......Metodos de tableViewController.......//
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //.......Metodos collectionView.....
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return storeArray.count
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: identificadorCell, for: indexPath)
-        cell.textLabel?.text = storeArray[indexPath.row]
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
+        cell.myLabel.text = storeArray[indexPath.row].name
+        cell.webSite.text = storeArray[indexPath.row].website
+        cell.imagenProducto = obtenerImagenConURL(URLImagen: (storeArray[indexPath.row].products?.first?.image)!)
+        cell.imagenUbicacion.backgroundColor = UIColor.green
+        
         cell.backgroundColor = UIColor.white
         return cell
     }
-    //.......Termina metodos de tableViewController.....//
+    //.......Terminan metodos de collection View....//
     
-    
-    
-    
+    func obtenerImagenConURL(URLImagen : String) -> UIImageView{
+        let urlImagen = URL(string: URLImagen)
+        let imagenRecuperada : UIImageView? = nil
+        Alamofire.request(urlImagen!).responseData { (responseData) in
+            if let error = responseData.error{
+                print("No se pudo cargar la imagen \(error)")
+                //regresar una imagen por default
+            }
+            guard let data = responseData.data else {return }//regresar imagen por default}
+            imagenRecuperada?.image = UIImage(data: data)
+
+        }
+        
+        return imagenRecuperada!
+    }
     
     
     /*@objc func getStores(){

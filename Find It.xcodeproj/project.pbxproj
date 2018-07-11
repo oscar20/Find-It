@@ -20,6 +20,7 @@
 		BA47D22320E0747300088350 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47D22220E0747300088350 /* Product.swift */; };
 		BA47D22520E0764000088350 /* PeticionProducto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47D22420E0764000088350 /* PeticionProducto.swift */; };
 		BAE6871C20F171E100059B43 /* resultadosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE6871B20F171E100059B43 /* resultadosViewController.swift */; };
+		BAF3943020F5B70B00E6750B /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3942F20F5B70B00E6750B /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		BA47D22420E0764000088350 /* PeticionProducto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeticionProducto.swift; sourceTree = "<group>"; };
 		BAE6871620F1671A00059B43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/oscaralmazanlora/Documents/Diplomado/ProyectoFinal/Find-It/Find It/Assets.xcassets"; sourceTree = "<absolute>"; };
 		BAE6871B20F171E100059B43 /* resultadosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = resultadosViewController.swift; path = "/Users/oscaralmazanlora/Documents/Diplomado/ProyectoFinal/Find-It/Find It/Controllers/resultadosViewController.swift"; sourceTree = "<absolute>"; };
+		BAF3942F20F5B70B00E6750B /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		E738CF9632A2F4CC38BBA899 /* Pods_Find_It.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_It.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				3DEAE5BA20D477300085E82C /* ViewController.swift */,
+				BAF3942F20F5B70B00E6750B /* CollectionViewCell.swift */,
 				BAE6871B20F171E100059B43 /* resultadosViewController.swift */,
 			);
 			path = Controllers;
@@ -256,6 +259,7 @@
 				BAE6871C20F171E100059B43 /* resultadosViewController.swift in Sources */,
 				3DEAE5B920D477300085E82C /* AppDelegate.swift in Sources */,
 				BA47D22320E0747300088350 /* Product.swift in Sources */,
+				BAF3943020F5B70B00E6750B /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
