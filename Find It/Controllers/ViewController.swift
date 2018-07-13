@@ -23,29 +23,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var collectionView: UICollectionView!
     
-    /*let parametroProducto: UITextField = {
-        let p = UITextField()
-        p.text = "v-neck+sweater"
-        p.backgroundColor = UIColor.yellow
-        p.translatesAutoresizingMaskIntoConstraints = false
-        p.keyboardType = UIKeyboardType.default
-        return p
-    }()
-
-    let registerButton: UIButton = {
-        
-        let btn = UIButton(type: .system)
-        btn.backgroundColor = UIColor(red: 232/255, green: 173/255, blue: 72/255, alpha: 1.0)
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitleColor(UIColor.white, for: .normal)
-        btn.setTitle("Buscar", for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-        btn.layer.cornerRadius = 5
-        btn.layer.masksToBounds = true
-        btn.addTarget(self, action: #selector(getStores), for: .touchUpInside)
-        return btn
-        
-    }()*/
     //.......Terminan elementos de vista......//
     
     //.................Variable...............//
@@ -67,44 +44,19 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     var difLongitud : Double = 0.0
     
     //............Terminan variables.........//
-    
-    /*let labelLatitud: UILabel = {
-       let labelLat = UILabel()
-        labelLat.text = "0.0"//40.714353
-        labelLat.translatesAutoresizingMaskIntoConstraints = false
-        return labelLat
-    }()
-    
-    let labelLongitud: UILabel = {
-       let labelLong = UILabel()
-        labelLong.text = "0.0"//-74.005973
-        labelLong.translatesAutoresizingMaskIntoConstraints = false
-        return labelLong
-    }()*/
-    
-    /*let labelUbicacion: UILabel = {
-        let ub = UILabel()
-        ub.translatesAutoresizingMaskIntoConstraints = false
-        ub.text = "Aqui voy a escribir mi ubicacion.."
-        ub.textColor = UIColor.white
-        ub.backgroundColor = UIColor.gray
-        return ub
-    }()*/
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        managerUbicationSetup()
+        //managerUbicationSetup()
         searchBarSetup()
         setupLayout()
         setupCollectionView()
-
     }
     
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
     
     //........Configuraciion de mi barra de busqueda..........//
     func searchBarSetup(){
@@ -125,19 +77,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     //.......Configuracion de vistas.......//
     func setupLayout() {
-        //self.parametroProducto.delegate = self
         view.backgroundColor = UIColor.white
-        //view.addSubview(registerButton)
-        //view.addSubview(parametroProducto)
         view.addSubview(productLabel)
         productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         productLabel.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -15).isActive = true
-        
-        /*parametroProducto.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 30).isActive = true
-        parametroProducto.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        registerButton.topAnchor.constraint(equalTo: parametroProducto.bottomAnchor, constant: 30).isActive = true
-        registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true*/
     }
     //.......Termina configuracion de vistas......//
     
@@ -204,30 +147,31 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.myLabel.text = storeArray[indexPath.row].name
         cell.webSite.text = storeArray[indexPath.row].website
-        cell.imagenProducto = obtenerImagenConURL(URLImagen: (storeArray[indexPath.row].products?.first?.image)!)
-        cell.imagenUbicacion.backgroundColor = UIColor.green
-        
-        cell.backgroundColor = UIColor.white
+        cell.imagenProducto.image = obtenerImagenConURL(URLImagen: "https://img.goodzer.com/peregimator/?size=medium&valign=center&sign=ab284624&image=https%3A//www.gamestop.com/common/images/sbox/146546a1.jpg")
+        cell.imagenUbicacion.image = UIImage(named: "leon")
         return cell
     }
     //.......Terminan metodos de collection View....//
     
-    func obtenerImagenConURL(URLImagen : String) -> UIImageView{
+    //.......Inicia funcion para obtener imagen con URL.......//
+    func obtenerImagenConURL(URLImagen : String) -> UIImage{
         let urlImagen = URL(string: URLImagen)
-        let imagenRecuperada : UIImageView? = nil
+        var imagenRecuperada : UIImage = UIImage(named: "fondo")!
         Alamofire.request(urlImagen!).responseData { (responseData) in
             if let error = responseData.error{
                 print("No se pudo cargar la imagen \(error)")
                 //regresar una imagen por default
             }
             guard let data = responseData.data else {return }//regresar imagen por default}
-            imagenRecuperada?.image = UIImage(data: data)
-
+            print(data)
+            let image = UIImage(data: data)
+            DispatchQueue.main.async(execute: {
+                imagenRecuperada = image!
+            })
         }
-        
-        return imagenRecuperada!
+        return imagenRecuperada
     }
-    
+    //.......Termina funcion para obtener imagen con URL.......//
     
     /*@objc func getStores(){
         if locationOscar.coordinate.latitude != 0.0 || locationOscar.coordinate.longitude != 0.0 {
