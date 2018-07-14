@@ -88,12 +88,13 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         storeArray = []
+        let miProductoVacio = [Product(id: nil, image: nil, original_price: nil, price: nil, title: nil, url: nil)]
         let textSearchBar = searchText
         let textSearchBar_trimmed  = textSearchBar.trimmingCharacters(in: .whitespaces) //Recorto la cadena.
         let formattingText = textSearchBar_trimmed.replacingOccurrences(of: " ", with: "+") //Reemplazando espacios en blanco.
         if formattingText.isEmpty{
             print("Empty string...")
-            storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: nil, products_found: nil, realtime_availability: nil, website: "Sin website")]
+            storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "Sin website")]
             self.collectionView.reloadData()
         }else{
             let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
@@ -107,7 +108,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                 do{
                     let peticionProducto = try JSONDecoder().decode(PeticionProducto.self, from: data)
                     if peticionProducto.stores_found == 0 || peticionProducto.stores_found == nil{
-                        self.storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: nil, products_found: nil, realtime_availability: nil, website: "Sin website")]
+                        self.storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "Sin website")]
                         self.collectionView.reloadData()
                     }else{
                         print("Results", peticionProducto.status!)
@@ -115,9 +116,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                             print("NAME:\(store.name!)\n")
                             self.storeArray.append(store)
                             self.collectionView.reloadData()
-                            /*store.products?.forEach({ (producto) in
-                                print("URL:\(producto.url!)")
-                            })*/
                         })
                     }
                 }catch let decodeError{
@@ -147,29 +145,37 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.myLabel.text = storeArray[indexPath.row].name
         cell.webSite.text = storeArray[indexPath.row].website
-        cell.imagenProducto.image = obtenerImagenConURL(URLImagen: "https://img.goodzer.com/peregimator/?size=medium&valign=center&sign=ab284624&image=https%3A//www.gamestop.com/common/images/sbox/146546a1.jpg")
-        cell.imagenUbicacion.image = UIImage(named: "leon")
+        
+        obtenerImagenConURL(objetoStore: (storeArray[indexPath.row].products?.first)!){ (imagenRecuperada, error) in
+            cell.imagenProducto.image = imagenRecuperada
+        }
+        cell.imagenUbicacion.image = UIImage(named: "ubicacion")
         return cell
     }
     //.......Terminan metodos de collection View....//
     
     //.......Inicia funcion para obtener imagen con URL.......//
-    func obtenerImagenConURL(URLImagen : String) -> UIImage{
-        let urlImagen = URL(string: URLImagen)
-        var imagenRecuperada : UIImage = UIImage(named: "fondo")!
-        Alamofire.request(urlImagen!).responseData { (responseData) in
-            if let error = responseData.error{
-                print("No se pudo cargar la imagen \(error)")
-                //regresar una imagen por default
+    func obtenerImagenConURL(objetoStore : Product, completionHandler: @escaping (UIImage?, Error?) -> () ){
+        if let urlImagen = objetoStore.image{
+            print("NO NIL")
+            print(urlImagen)
+            let urlImagenPeticion = URL(string: urlImagen)
+            Alamofire.request(urlImagenPeticion!).responseData { (responseData) in
+                if let error = responseData.error{
+                    print("No se pudo cargar la imagen \(error)")
+                }
+                guard let data = responseData.data else {return}
+                let image = UIImage(data: data)
+                DispatchQueue.main.async(execute: {
+                    completionHandler(image,nil)
+                })
             }
-            guard let data = responseData.data else {return }//regresar imagen por default}
-            print(data)
-            let image = UIImage(data: data)
-            DispatchQueue.main.async(execute: {
-                imagenRecuperada = image!
-            })
+        }else{
+            print("nil")
+            let imagenVacia = UIImage(named: "noDisponible")
+            completionHandler(imagenVacia,nil)
         }
-        return imagenRecuperada
+        
     }
     //.......Termina funcion para obtener imagen con URL.......//
     
@@ -181,14 +187,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             print("No se puede enviar la peticion con coordenadas de 0.0")
         }
     }*/
-    
-    
-    
-    /*func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        parametroProducto.resignFirstResponder() //Renuncia a tu estado de primera ventana.
-        return true
-    }*/
-    //Termina dismiss keyboard..
     
     //Implementando Ubicacion
    
