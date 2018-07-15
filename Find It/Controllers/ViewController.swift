@@ -11,17 +11,8 @@ import CoreLocation
 import Alamofire
 
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, CLLocationManagerDelegate,UISearchBarDelegate {
-    
-    //......Elementos de vista......//
-    /*let productLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.text = "¿Qué producto estás buscando?"
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()*/
-    
+   
     @IBOutlet weak var searchBar: UISearchBar!
-    //@IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     //.......Terminan elementos de vista......//
     
@@ -50,7 +41,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         //managerUbicationSetup()
         searchBarSetup()
         setupCollectionView()
-        setupLayout()
         setupCollectionViewGrid()
     }
     
@@ -58,7 +48,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
-        //collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     //........Configuraciion de mi barra de busqueda..........//
@@ -81,36 +70,17 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     //.....Termina configuracion de CoreLocation....//
     
-    //.......Configuracion de vistas.......//
-    func setupLayout() {
-        /*let imagenFondo = UIImageView(frame: UIScreen.main.bounds)
-        imagenFondo.image = UIImage(named: "degradado1")
-        imagenFondo.contentMode = UIViewContentMode.scaleAspectFill
-        imagenFondo.translatesAutoresizingMaskIntoConstraints = false
-        imagenFondo.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        imagenFondo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        imagenFondo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        imagenFondo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        view.insertSubview(imagenFondo, at: 0)*/
-        //view.addSubview(productLabel)
-        //searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 200)
-        //productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        //productLabel.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -10).isActive = true
-        //searchBar.topAnchor.constraint(equalTo: productLabel.bottomAnchor, constant: 30).isActive = true
-    }
-    //.......Termina configuracion de vistas......//
-    
     //.....Enviar peticion cada que cambia el texto escrito en searchBar......//
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         storeArray = []
-        let miProductoVacio = [Product(id: nil, image: nil, original_price: nil, price: nil, title: nil, url: nil)]
+        let miProductoVacio = [Product(id: nil, image: nil, original_price: nil, price: 0.00, title: nil, url: nil)]
         let textSearchBar = searchText
         let textSearchBar_trimmed  = textSearchBar.trimmingCharacters(in: .whitespaces) //Recorto la cadena.
         let formattingText = textSearchBar_trimmed.replacingOccurrences(of: " ", with: "+") //Reemplazando espacios en blanco.
         if formattingText.isEmpty{
             print("Empty string...")
-            storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "No se encontraron productos...", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "")]
+            storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "No se encontraron productos..", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "")]
             self.collectionView.reloadData()
         }else{
             let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
@@ -178,6 +148,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell.imagenProducto.image = imagenRecuperada
         }
         cell.imagenUbicacion.image = UIImage(named: "ubicacion2")
+        cell.precioLabel.text = "$ \(String(format: "%.2f", (storeArray[indexPath.row].products?.first?.price)!))"
         return cell
     }
 
@@ -185,7 +156,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func setupCollectionViewGrid(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flow.minimumLineSpacing = CGFloat(7.0)
-        flow.itemSize.height = CGFloat(60.0)
+        flow.itemSize.height = CGFloat(80.0)
     }
     
     //.......Terminan metodos de collection View....//

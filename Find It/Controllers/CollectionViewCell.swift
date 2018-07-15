@@ -14,6 +14,8 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imagenUbicacion: UIImageView!
     @IBOutlet weak var webSite: UILabel!
     @IBOutlet weak var myLabel: UILabel!
+    @IBOutlet weak var precioLabel: UILabel!
+
     //@IBOutlet var myLabel: UILabel!
     //@IBOutlet var webSite: UILabel!
     //@IBOutlet var imagenProducto: UIImageView!
