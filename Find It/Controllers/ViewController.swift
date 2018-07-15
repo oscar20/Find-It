@@ -13,21 +13,22 @@ import Alamofire
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, CLLocationManagerDelegate,UISearchBarDelegate {
     
     //......Elementos de vista......//
-    let productLabel : UILabel = {
+    /*let productLabel : UILabel = {
         let lbl = UILabel()
         lbl.text = "¿Qué producto estás buscando?"
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
-    }()
+    }()*/
     
+    //@IBOutlet weak var searchBar: UISearchBar!
+    //@IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet var collectionView: UICollectionView!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
     //.......Terminan elementos de vista......//
     
     //.................Variable...............//
     let peticion = Peticion() //variable para hacer la peticion a mi API
-    final let apiKey = ""
+    final let apiKey = "4ee7cdf8c6a05e6f91f8077f3bd003ba"
     let identificadorCell = "rowID"
     var storeArray : [ProductStore] = []
 
@@ -49,13 +50,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         super.viewDidLoad()
         //managerUbicationSetup()
         searchBarSetup()
-        setupLayout()
         setupCollectionView()
+        setupLayout()
+        setupCollectionViewGrid()
     }
     
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        //collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     //........Configuraciion de mi barra de busqueda..........//
@@ -63,6 +66,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         searchBar.delegate = self
         searchBar.placeholder = "Ingresa tu producto aquí..."
         searchBar.barStyle = UIBarStyle.default
+        searchBar.keyboardType = UIKeyboardType.alphabet
+        //searchBar.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     //.....Terminan configuracion de barra de busqueda.......//
     
@@ -77,10 +83,12 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     //.......Configuracion de vistas.......//
     func setupLayout() {
-        view.backgroundColor = UIColor.white
-        view.addSubview(productLabel)
-        productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        productLabel.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -15).isActive = true
+        //view.backgroundColor = UIColor.white
+        //view.addSubview(productLabel)
+        //searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 200)
+        //productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //productLabel.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -10).isActive = true
+        //searchBar.topAnchor.constraint(equalTo: productLabel.bottomAnchor, constant: 30).isActive = true
     }
     //.......Termina configuracion de vistas......//
     
@@ -94,7 +102,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         let formattingText = textSearchBar_trimmed.replacingOccurrences(of: " ", with: "+") //Reemplazando espacios en blanco.
         if formattingText.isEmpty{
             print("Empty string...")
-            storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "Sin website")]
+            storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "No se encontraron productos...", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "")]
             self.collectionView.reloadData()
         }else{
             let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
@@ -108,7 +116,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                 do{
                     let peticionProducto = try JSONDecoder().decode(PeticionProducto.self, from: data)
                     if peticionProducto.stores_found == 0 || peticionProducto.stores_found == nil{
-                        self.storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "Sin nombre", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "Sin website")]
+                        self.storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "No se encontraron productos...", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "")]
                         self.collectionView.reloadData()
                     }else{
                         print("Results", peticionProducto.status!)
@@ -137,6 +145,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     //.......Termina dismiss keyboard....//
     
     //.......Metodos collectionView.....
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return storeArray.count
     }
@@ -152,6 +164,25 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         cell.imagenUbicacion.image = UIImage(named: "ubicacion")
         return cell
     }
+
+    
+    func setupCollectionViewGrid(){
+        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        //let width = view.frame.size.width / 1
+        flow.minimumLineSpacing = CGFloat(7.0)
+        flow.itemSize.height = CGFloat(60.0)
+        //flow.sectionInset = UIEdgeInsetsMake(0, 30, 0, 30)
+        //flow.itemSize = CGSize(width: width, height: 60.0)
+        //flow.itemSize.width = self.view.frame.width
+        //flow.itemSize.width = CGFloat(80.0)
+        //flow.sectionInset.left = CGFloat(20.0)
+        //flow.sectionInset.right = CGFloat(10.0)
+        //flow.estimatedItemSize.width = self.view.frame.width
+    }
+    
+    
+    
+    
     //.......Terminan metodos de collection View....//
     
     //.......Inicia funcion para obtener imagen con URL.......//
@@ -233,4 +264,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }*/
     
 }
+
+/*extension ViewController : UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellsAcross: CGFloat = 1
+        let spaceBetweenCells: CGFloat = 1//
+        let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
+        return CGSize(width: dim, height: dim)
+        //let width = self.view.frame.width
+        //return CGSize(width: width, height: 80)
+    }
+}*/
 
