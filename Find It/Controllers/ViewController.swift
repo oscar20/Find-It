@@ -20,15 +20,14 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         return lbl
     }()*/
     
-    //@IBOutlet weak var searchBar: UISearchBar!
-    //@IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    //@IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     //.......Terminan elementos de vista......//
     
     //.................Variable...............//
     let peticion = Peticion() //variable para hacer la peticion a mi API
-    final let apiKey = "4ee7cdf8c6a05e6f91f8077f3bd003ba"
+    final let apiKey = ""
     let identificadorCell = "rowID"
     var storeArray : [ProductStore] = []
 
@@ -58,6 +57,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.clear
         //collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -67,8 +67,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         searchBar.placeholder = "Ingresa tu producto aquí..."
         searchBar.barStyle = UIBarStyle.default
         searchBar.keyboardType = UIKeyboardType.alphabet
-        //searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
+        searchBar.layer.cornerRadius = 5.0
+                
     }
     //.....Terminan configuracion de barra de busqueda.......//
     
@@ -83,7 +83,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     //.......Configuracion de vistas.......//
     func setupLayout() {
-        //view.backgroundColor = UIColor.white
+        /*let imagenFondo = UIImageView(frame: UIScreen.main.bounds)
+        imagenFondo.image = UIImage(named: "degradado1")
+        imagenFondo.contentMode = UIViewContentMode.scaleAspectFill
+        imagenFondo.translatesAutoresizingMaskIntoConstraints = false
+        imagenFondo.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        imagenFondo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        imagenFondo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        imagenFondo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        view.insertSubview(imagenFondo, at: 0)*/
         //view.addSubview(productLabel)
         //searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 200)
         //productLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -107,6 +115,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         }else{
             let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
             let url = URL(string: urlString)
+            print(urlString)
             Alamofire.request(url!).responseData{ (dataResponse) in
                 if let err = dataResponse.error{
                     print("Hubo un error", err)
@@ -155,41 +164,37 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
+        cell.backgroundColor = UIColor.clear
         cell.myLabel.text = storeArray[indexPath.row].name
         cell.webSite.text = storeArray[indexPath.row].website
         
         obtenerImagenConURL(objetoStore: (storeArray[indexPath.row].products?.first)!){ (imagenRecuperada, error) in
+            cell.imagenProducto.backgroundColor = UIColor.clear
+            cell.imagenProducto.layer.masksToBounds = true
+            cell.imagenProducto.layer.cornerRadius = 5.0
+            cell.imagenProducto.layer.borderWidth = 0.7
+            cell.imagenProducto.layer.borderColor = UIColor(red: 18/255, green: 113/255, blue: 115/255, alpha: 1.0).cgColor
+            cell.imagenProducto.contentMode = UIViewContentMode.scaleAspectFill
             cell.imagenProducto.image = imagenRecuperada
         }
-        cell.imagenUbicacion.image = UIImage(named: "ubicacion")
+        cell.imagenUbicacion.image = UIImage(named: "ubicacion2")
         return cell
     }
 
     
     func setupCollectionViewGrid(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        //let width = view.frame.size.width / 1
         flow.minimumLineSpacing = CGFloat(7.0)
         flow.itemSize.height = CGFloat(60.0)
-        //flow.sectionInset = UIEdgeInsetsMake(0, 30, 0, 30)
-        //flow.itemSize = CGSize(width: width, height: 60.0)
-        //flow.itemSize.width = self.view.frame.width
-        //flow.itemSize.width = CGFloat(80.0)
-        //flow.sectionInset.left = CGFloat(20.0)
-        //flow.sectionInset.right = CGFloat(10.0)
-        //flow.estimatedItemSize.width = self.view.frame.width
     }
-    
-    
-    
     
     //.......Terminan metodos de collection View....//
     
     //.......Inicia funcion para obtener imagen con URL.......//
     func obtenerImagenConURL(objetoStore : Product, completionHandler: @escaping (UIImage?, Error?) -> () ){
         if let urlImagen = objetoStore.image{
-            print("NO NIL")
-            print(urlImagen)
+            //print("NO NIL")
+            //print(urlImagen)
             let urlImagenPeticion = URL(string: urlImagen)
             Alamofire.request(urlImagenPeticion!).responseData { (responseData) in
                 if let error = responseData.error{

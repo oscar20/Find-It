@@ -19,8 +19,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="miFondoAzul" translatesAutoresizingMaskIntoConstraints="NO" id="CSG-Za-tTf">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YCY-Dg-Fbk">
-                                <rect key="frame" x="15" y="192" width="345" height="460"/>
+                                <rect key="frame" x="15" y="191" width="345" height="461"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="7" minimumInteritemSpacing="0.0" id="9RW-zJ-0sH">
                                     <size key="itemSize" width="305" height="77"/>
@@ -37,9 +40,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A3U-LI-AHN">
-                                                    <rect key="frame" x="13" y="10" width="52" height="57"/>
+                                                    <rect key="frame" x="13" y="10" width="55" height="57"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="52" id="9hK-82-nsk"/>
+                                                        <constraint firstAttribute="width" constant="55" id="9hK-82-nsk"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cTd-6D-dUk">
@@ -49,13 +52,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6R-AU-DQb">
-                                                    <rect key="frame" x="70" y="11" width="189" height="16"/>
+                                                    <rect key="frame" x="73" y="11" width="186" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paI-fT-yjs">
-                                                    <rect key="frame" x="70" y="30" width="189" height="16"/>
+                                                    <rect key="frame" x="73" y="30" width="186" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -86,29 +89,30 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="tKU-Ht-J9s">
-                                <rect key="frame" x="15" y="107" width="345" height="65"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
+                            <searchBar contentMode="scaleAspectFill" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="tKU-Ht-J9s">
+                                <rect key="frame" x="15" y="106" width="345" height="65"/>
+                                <color key="barTintColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿Qué producto estás buscando?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOP-ya-lYW">
-                                <rect key="frame" x="63.5" y="79" width="248" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="78" y="79" width="219" height="20"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.55193932523645217" green="1" blue="0.94816255192065058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YCY-Dg-Fbk" firstAttribute="bottom" secondItem="GN9-4V-CFb" secondAttribute="bottom" constant="-15" id="4HG-Ne-o3s"/>
                             <constraint firstItem="YCY-Dg-Fbk" firstAttribute="trailing" secondItem="GN9-4V-CFb" secondAttribute="trailing" constant="-15" id="6F6-hA-oHr"/>
                             <constraint firstItem="rOP-ya-lYW" firstAttribute="top" secondItem="GN9-4V-CFb" secondAttribute="top" constant="15" id="Bzt-P0-n32"/>
                             <constraint firstItem="tKU-Ht-J9s" firstAttribute="leading" secondItem="GN9-4V-CFb" secondAttribute="leading" constant="15" id="IKC-CF-9XS"/>
+                            <constraint firstAttribute="bottom" secondItem="CSG-Za-tTf" secondAttribute="bottom" id="Ije-Q0-YCI"/>
                             <constraint firstItem="YCY-Dg-Fbk" firstAttribute="top" secondItem="tKU-Ht-J9s" secondAttribute="bottom" constant="20" id="IpO-aL-eoz"/>
+                            <constraint firstItem="CSG-Za-tTf" firstAttribute="leading" secondItem="GN9-4V-CFb" secondAttribute="leading" id="MgQ-XE-Phx"/>
+                            <constraint firstItem="GN9-4V-CFb" firstAttribute="trailing" secondItem="CSG-Za-tTf" secondAttribute="trailing" id="VCs-1n-iUV"/>
                             <constraint firstItem="rOP-ya-lYW" firstAttribute="centerX" secondItem="gUb-Ax-aRY" secondAttribute="centerX" id="aXg-nm-fKT"/>
+                            <constraint firstItem="CSG-Za-tTf" firstAttribute="top" secondItem="GN9-4V-CFb" secondAttribute="top" id="dEt-hO-PTy"/>
                             <constraint firstItem="YCY-Dg-Fbk" firstAttribute="leading" secondItem="GN9-4V-CFb" secondAttribute="leading" constant="15" id="dHA-r9-lZh"/>
                             <constraint firstItem="YCY-Dg-Fbk" firstAttribute="top" secondItem="tKU-Ht-J9s" secondAttribute="top" constant="85" id="hxd-bQ-Rp9"/>
                             <constraint firstItem="tKU-Ht-J9s" firstAttribute="top" secondItem="rOP-ya-lYW" secondAttribute="bottom" constant="7" id="ihu-ca-sbu"/>
@@ -145,4 +149,7 @@
             <point key="canvasLocation" x="33" y="779"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="miFondoAzul" width="198" height="306"/>
+    </resources>
 </document>
