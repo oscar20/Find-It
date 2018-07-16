@@ -12,8 +12,10 @@ import Alamofire
 
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, CLLocationManagerDelegate,UISearchBarDelegate {
    
+    //...........Elementos de vista...........//
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var labelDireccion: UILabel!
     //.......Terminan elementos de vista......//
     
     //.................Variable...............//
@@ -21,8 +23,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     final let apiKey = ""
     let identificadorCell = "rowID"
     var storeArray : [ProductStore] = []
+    let managerUbication = CLLocationManager()
+    var locationOscar = CLLocation()
 
-    var result : String = "jjjj"
+    /*var result : String = "jjjj"
     let managerUbication = CLLocationManager()
     var locationOscar = CLLocation()
     //Variable parciales para guardar la locacion temporal
@@ -32,13 +36,13 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     //Agregando coordenadas
     let EUlocation = CLLocation(latitude: 40.71435323, longitude: -74.00597345)
     var difLatitud : Double = 0.0
-    var difLongitud : Double = 0.0
+    var difLongitud : Double = 0.0*/
     
     //............Terminan variables.........//
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //managerUbicationSetup()
+        managerUbicationSetup()
         searchBarSetup()
         setupCollectionView()
         setupCollectionViewGrid()
@@ -152,14 +156,23 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         return cell
     }
 
-    
+    //.......Metodo para diseño de collection View......//
     func setupCollectionViewGrid(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flow.minimumLineSpacing = CGFloat(7.0)
         flow.itemSize.height = CGFloat(80.0)
     }
+    //....Termina metodo de diseño de collection View....//
     
     //.......Terminan metodos de collection View....//
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let imageUbicacion : UbicacionViewController = self.storyboard?.instantiateViewController(withIdentifier: "UbicacionViewController") as! UbicacionViewController
+        self.navigationController?.pushViewController(imageUbicacion, animated: true)
+    }
+    //........Metodo para ir a otra vista al hacer click en icono ubicacion.....//
+    
+    //..Termina Metodo para ir a otra vista al hacer click en icono ubicacion.....//
     
     //.......Inicia funcion para obtener imagen con URL.......//
     func obtenerImagenConURL(objetoStore : Product, completionHandler: @escaping (UIImage?, Error?) -> () ){
@@ -195,18 +208,26 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         }
     }*/
     
-    //Implementando Ubicacion
+    //.....Metodo que actualiza la ubicacion....//
    
-    /*func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         locationOscar = locations[0]
-        print("LATITUD DE LOCATION MANAGER: \(managerUbication.location?.coordinate.latitude)")
-        print("LONGITUD DE LOCATION MANAGER: \(managerUbication.location?.coordinate.longitude)")
-        //let locationLatitud = locationOscar.coordinate.latitude
-        //let locationLongitud = locationOscar.coordinate.longitude
-        tempLatitud = locationOscar.coordinate.latitude
-        tempLongitud = locationOscar.coordinate.longitude
-        print("LATITUD EN DIDUPDATE: \(tempLatitud)")
-        print("LONGITUD EN DIDUPDATE: \(tempLongitud)")
+        print("LATITUD EN DIDUPDATE: \(locationOscar.coordinate.latitude)")
+        print("LONGITUD EN DIDUPDATE: \(locationOscar.coordinate.longitude)")
+        
+        
+        CLGeocoder().reverseGeocodeLocation(locationOscar) { (place, error) in
+            if error != nil {
+                print("There is an error!!")
+            }else{
+                if let myplace = place?[0]{
+                    self.labelDireccion.text = "\(myplace.name!)"
+                    //print(myplace.thoroughfare!)
+                    //print(myplace.subThoroughfare!)
+                }
+            }
+            
+        }
         
         //actualizaCoordenadas(latitudActual: locationLatitud,longitudActual: locationLongitud)
         /*difLatitud = EUlocation.coordinate.latitude - locationOscar.coordinate.latitude
@@ -223,7 +244,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         print("Latitud: \(locationOscar.coordinate.latitude)")
         print("Diferencia: \(difLatitud)")
         print("Suma: \(sumaLatitud)")*/
-    }*/
+    }
     
     /*func actualizaCoordenadas(latitudActual: Double, longitudActual: Double){
         print("LAT ACTUAL: \(latitudActual) LONG ACTUAL: \(longitudActual)")
@@ -240,15 +261,3 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }*/
     
 }
-
-/*extension ViewController : UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellsAcross: CGFloat = 1
-        let spaceBetweenCells: CGFloat = 1//
-        let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
-        return CGSize(width: dim, height: dim)
-        //let width = self.view.frame.width
-        //return CGSize(width: width, height: 80)
-    }
-}*/
-

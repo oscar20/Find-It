@@ -20,6 +20,7 @@
 		BA47D22520E0764000088350 /* PeticionProducto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47D22420E0764000088350 /* PeticionProducto.swift */; };
 		BADABCA120F862DB00D1A725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE5BC20D477300085E82C /* Main.storyboard */; };
 		BADABCA320F8641700D1A725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAE6871620F1671A00059B43 /* Assets.xcassets */; };
+		BADC796020FC13A3004B1197 /* UbicacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADC795F20FC13A3004B1197 /* UbicacionViewController.swift */; };
 		BAF3943020F5B70B00E6750B /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3942F20F5B70B00E6750B /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		BA47D22020E0735300088350 /* ProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
 		BA47D22220E0747300088350 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		BA47D22420E0764000088350 /* PeticionProducto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeticionProducto.swift; sourceTree = "<group>"; };
+		BADC795F20FC13A3004B1197 /* UbicacionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UbicacionViewController.swift; sourceTree = "<group>"; };
 		BAE6871620F1671A00059B43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/oscaralmazanlora/Documents/Diplomado/ProyectoFinal/Find-It/Find It/Assets.xcassets"; sourceTree = "<absolute>"; };
 		BAF3942F20F5B70B00E6750B /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		E738CF9632A2F4CC38BBA899 /* Pods_Find_It.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_It.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +108,7 @@
 			children = (
 				3DEAE5BA20D477300085E82C /* ViewController.swift */,
 				BAF3942F20F5B70B00E6750B /* CollectionViewCell.swift */,
+				BADC795F20FC13A3004B1197 /* UbicacionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				BA47D22520E0764000088350 /* PeticionProducto.swift in Sources */,
 				BA47D22120E0735300088350 /* ProductStore.swift in Sources */,
 				3DEAE5BB20D477300085E82C /* ViewController.swift in Sources */,
+				BADC796020FC13A3004B1197 /* UbicacionViewController.swift in Sources */,
 				3DB59A8A20D49FBB0014F2A6 /* Store.swift in Sources */,
 				BA08C39F20E9641800FF6FBD /* Peticion.swift in Sources */,
 				BA47D21F20E0730400088350 /* Location.swift in Sources */,
