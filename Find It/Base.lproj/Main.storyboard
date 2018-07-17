@@ -145,6 +145,7 @@
                         <outlet property="collectionView" destination="YCY-Dg-Fbk" id="LP7-Hl-DzS"/>
                         <outlet property="labelDireccion" destination="bbh-z4-0An" id="m1A-Gi-22E"/>
                         <outlet property="searchBar" destination="tKU-Ht-J9s" id="kMW-Cz-r0Y"/>
+                        <segue destination="xiW-wf-IG2" kind="show" identifier="UbicacionViewController" id="MSc-Nb-KQn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQ1-kA-2fj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,13 +159,59 @@
                     <view key="view" contentMode="scaleToFill" id="0PS-x2-BGD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELp-us-6gE">
+                                <rect key="frame" x="77" y="264" width="268" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconoOrigen" translatesAutoresizingMaskIntoConstraints="NO" id="UFb-Tu-QOX">
+                                <rect key="frame" x="34" y="264" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="OmC-NJ-fHm"/>
+                                    <constraint firstAttribute="width" constant="20" id="Y8W-yQ-geq"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconoDestino" translatesAutoresizingMaskIntoConstraints="NO" id="OpA-Ck-vdo">
+                                <rect key="frame" x="34" y="292" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Vdo-3b-eup"/>
+                                    <constraint firstAttribute="width" constant="20" id="ffM-07-CgJ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLX-RQ-iF8">
+                                <rect key="frame" x="77" y="293" width="268" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AHB-6z-BZc" firstAttribute="trailing" secondItem="ELp-us-6gE" secondAttribute="trailing" constant="30" id="J6h-3n-UJ7"/>
+                            <constraint firstItem="AHB-6z-BZc" firstAttribute="trailing" secondItem="GLX-RQ-iF8" secondAttribute="trailing" constant="30" id="Ouq-Ja-gRV"/>
+                            <constraint firstItem="GLX-RQ-iF8" firstAttribute="leading" secondItem="OpA-Ck-vdo" secondAttribute="trailing" constant="23" id="Qqo-Ad-WIs"/>
+                            <constraint firstItem="ELp-us-6gE" firstAttribute="top" secondItem="AHB-6z-BZc" secondAttribute="top" constant="200" id="gjt-CG-BPi"/>
+                            <constraint firstItem="ELp-us-6gE" firstAttribute="leading" secondItem="UFb-Tu-QOX" secondAttribute="trailing" constant="23" id="oFb-rr-FeY"/>
+                            <constraint firstItem="UFb-Tu-QOX" firstAttribute="leading" secondItem="AHB-6z-BZc" secondAttribute="leading" constant="34" id="qPH-eg-SUk"/>
+                            <constraint firstItem="OpA-Ck-vdo" firstAttribute="top" secondItem="UFb-Tu-QOX" secondAttribute="bottom" constant="8" id="qzA-f9-dSM"/>
+                            <constraint firstItem="UFb-Tu-QOX" firstAttribute="top" secondItem="AHB-6z-BZc" secondAttribute="top" constant="200" id="tbl-Xq-d4N"/>
+                            <constraint firstItem="OpA-Ck-vdo" firstAttribute="leading" secondItem="AHB-6z-BZc" secondAttribute="leading" constant="34" id="vbN-jR-xNu"/>
+                            <constraint firstItem="GLX-RQ-iF8" firstAttribute="top" secondItem="ELp-us-6gE" secondAttribute="bottom" constant="8" id="z7a-ma-8rz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AHB-6z-BZc"/>
                     </view>
+                    <connections>
+                        <outlet property="iconoDestino" destination="OpA-Ck-vdo" id="zh4-kY-d9e"/>
+                        <outlet property="iconoOrigen" destination="UFb-Tu-QOX" id="ytZ-h9-9ij"/>
+                        <outlet property="labelDestino" destination="GLX-RQ-iF8" id="wk0-Um-Jfs"/>
+                        <outlet property="labelOrigen" destination="ELp-us-6gE" id="dIz-JH-BuR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rpq-oc-fSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1606" y="779"/>
+            <point key="canvasLocation" x="1605.5999999999999" y="778.56071964017997"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WoA-5D-73V">
@@ -186,6 +233,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iconoDestino" width="256" height="256"/>
+        <image name="iconoOrigen" width="256" height="256"/>
         <image name="miFondoAzul" width="198" height="306"/>
     </resources>
 </document>

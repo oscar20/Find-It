@@ -10,9 +10,21 @@ import UIKit
 
 class UbicacionViewController: UIViewController {
 
+    @IBOutlet weak var labelDestino: UILabel!
+    @IBOutlet weak var labelOrigen: UILabel!
+    @IBOutlet weak var iconoDestino: UIImageView!
+    @IBOutlet weak var iconoOrigen: UIImageView!
+    
+    var miCadenaOrigen = String()
+    var miCadenaDestino = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        labelOrigen.text = miCadenaOrigen
+        labelDestino.text = miCadenaDestino
+        
+        print("MI CADENA ORIGEN ES: \(miCadenaOrigen)")
+        print("MI CADENA DESTINO ES: \(miCadenaDestino)")
         // Do any additional setup after loading the view.
     }
     
