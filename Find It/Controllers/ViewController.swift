@@ -15,7 +15,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     //...........Elementos de vista...........//
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var labelDireccion: UILabel!
     //.......Terminan elementos de vista......//
     
     //.................Variable...............//
@@ -25,18 +24,17 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     var storeArray : [ProductStore] = []
     let managerUbication = CLLocationManager()
     var locationOscar = CLLocation()
-
-    /*var result : String = "jjjj"
-    let managerUbication = CLLocationManager()
-    var locationOscar = CLLocation()
-    //Variable parciales para guardar la locacion temporal
-    var tempLatitud : Double = 0.0
-    var tempLongitud : Double = 0.0
+    var miLatitud : String = String()
+    var miLongitud : String = String()
     
-    //Agregando coordenadas
+    //.....Variable que necesito para trabajar con mis coordenadas...
+    var EULocationLatitud : Double = 40.71435323
+    var EULocationLongitud : Double = -74.00597345
     let EUlocation = CLLocation(latitude: 40.71435323, longitude: -74.00597345)
-    var difLatitud : Double = 0.0
-    var difLongitud : Double = 0.0*/
+    var latitud : Double = Double()
+    var longitud : Double = Double()
+    var temporalLatitud : Double = Double()
+    var temporalLongitud : Double = Double()
     
     //............Terminan variables.........//
 
@@ -71,6 +69,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         managerUbication.desiredAccuracy = kCLLocationAccuracyBest
         managerUbication.requestWhenInUseAuthorization()
         managerUbication.startUpdatingLocation()
+        latitud = (managerUbication.location?.coordinate.latitude)!
+        longitud = (managerUbication.location?.coordinate.longitude)!
     }
     //.....Termina configuracion de CoreLocation....//
     
@@ -139,8 +139,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.backgroundColor = UIColor.clear
-        cell.myLabel.text = storeArray[indexPath.row].name
-        cell.webSite.text = storeArray[indexPath.row].website
+        cell.myLabel.text = storeArray[indexPath.row].products?.first?.title
+        cell.webSite.text = storeArray[indexPath.row].name
         
         obtenerImagenConURL(objetoStore: (storeArray[indexPath.row].products?.first)!){ (imagenRecuperada, error) in
             cell.imagenProducto.backgroundColor = UIColor.clear
@@ -152,7 +152,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell.imagenProducto.image = imagenRecuperada
         }
         cell.imagenUbicacion.image = UIImage(named: "ubicacion2")
-        cell.precioLabel.text = "$ \(String(format: "%.2f", (storeArray[indexPath.row].products?.first?.price)!))"
+        cell.precioLabel.text = "$\(String(format: "%.2f", (storeArray[indexPath.row].products?.first?.price)!))"
         return cell
     }
     //.......Terminan metodos de collection View....//
@@ -203,65 +203,42 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         locationOscar = locations[0]
-        print("LATITUD EN DIDUPDATE: \(locationOscar.coordinate.latitude)")
-        print("LONGITUD EN DIDUPDATE: \(locationOscar.coordinate.longitude)")
+        print("LATITUD ES: \(latitud)")
+        print("LONGITUD ES: \(longitud)")
+        temporalLatitud = locationOscar.coordinate.latitude - latitud
+        temporalLongitud = locationOscar.coordinate.longitude - longitud
+        print("TEMPORAL LATITUD ES: \(temporalLatitud)")  //DEBE DE DAR CASI 0
+        print("TEMPORAL LONGITUD ES: \(temporalLongitud)") //DEBE DE DAR CASI 0
+        EULocationLatitud = EUlocation.coordinate.latitude + temporalLatitud
+        EULocationLongitud = EUlocation.coordinate.longitude + temporalLongitud
+        print("EU LATITUD ES: \(EULocationLatitud)")
+        print("EU LONGITUD ES: \(EULocationLongitud)")
+        latitud = locationOscar.coordinate.latitude
+        longitud = locationOscar.coordinate.longitude
         
-        CLGeocoder().reverseGeocodeLocation(locationOscar) { (place, error) in  //Para obtener la direccion dadas las coordenadas geograficas
+        
+        /*CLGeocoder().reverseGeocodeLocation(locationOscar) { (place, error) in  //Para obtener la direccion dadas las coordenadas geograficas
             if error != nil {
                 print("There is an error!!")
+                //print(error)
             }else{
                 if let myplace = place?[0]{
                     self.labelDireccion.text = "\(myplace.name!)"
+                    self.miLatitud = "\(myplace.name!) \(myplace.thoroughfare!) \(myplace.country!)"
+                    self.miLongitud = myplace.name!
                 }
             }
             
-        }
+        }*/
     }
     //.......Termina metodo que actualiza la ubicacion....//
-    
-    /*@objc func getStores(){
-        if locationOscar.coordinate.latitude != 0.0 || locationOscar.coordinate.longitude != 0.0 {
-            peticion.getStoresAlamo(latitud: locationOscar.coordinate.latitude, longitud: locationOscar.coordinate.longitude, parametroProducto: parametroProducto)
-            performSegue(withIdentifier: "segue", sender: self)
-        }else{
-            print("No se puede enviar la peticion con coordenadas de 0.0")
-        }
-    }*/
-    
-   
-    
-        
-        //actualizaCoordenadas(latitudActual: locationLatitud,longitudActual: locationLongitud)
-        /*difLatitud = EUlocation.coordinate.latitude - locationOscar.coordinate.latitude
-        difLongitud = EUlocation.coordinate.longitude - locationOscar.coordinate.longitude
-        
-        let sumaLatitud : Double = locationOscar.coordinate.latitude + difLatitud
-        let sumaLongitud : Double = locationOscar.coordinate.longitude + difLongitud
-        
-        labelLatitud.text = String(format: "%.6f", sumaLatitud) //String(format: "%f", locationOscar.coordinate.latitude)
-        labelLongitud.text = String(sumaLongitud) //String(format: "%f", locationOscar.coordinate.longitude)
-        //print("Latitud: \(locationOscar.coordinate.latitude) longitud: \(locationOscar.coordinate.longitude)")
-        //print("Suma de latitudes y longitudes: \(sumaLatitud) : \(sumaLongitud)")
-        //print("La diferencia de latitud es: \(difLatitud) y la diferencia de longitud es: \(difLongitud)")
-        print("Latitud: \(locationOscar.coordinate.latitude)")
-        print("Diferencia: \(difLatitud)")
-        print("Suma: \(sumaLatitud)")*/
-    
-    
-    /*func actualizaCoordenadas(latitudActual: Double, longitudActual: Double){
-        print("LAT ACTUAL: \(latitudActual) LONG ACTUAL: \(longitudActual)")
-        print("TEMP LAT: \(tempLatitud) TEMP LONG: \(tempLongitud)")
-        /*let diferenciaLatitudes = latitudActual - tempLatitud
-        let diferenciaLongitudes = longitudActual - tempLongitud
-        print("Diferencia de latitud:\(diferenciaLatitudes), longitudes: \(diferenciaLongitudes)")
-        print("EULOCATION LATITUD: \(Double(EUlocation.coordinate.latitude) + diferenciaLatitudes)")*/
-    }*/
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedIndexPath = sender as? NSIndexPath
         let ubicacionViewController = segue.destination as! UbicacionViewController
-        ubicacionViewController.miCadenaOrigen = storeArray[(selectedIndexPath?.row)!].website as! String
-        ubicacionViewController.miCadenaDestino = storeArray[(selectedIndexPath?.row)!].name as! String
+        ubicacionViewController.miCadenaOrigen = String(EULocationLatitud) //storeArray[(selectedIndexPath?.row)!].website as! String
+        ubicacionViewController.miCadenaDestino = String(EULocationLongitud)  //storeArray[(selectedIndexPath?.row)!].name as! String
     }
     
 }
