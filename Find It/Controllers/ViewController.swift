@@ -19,7 +19,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     //.................Variable...............//
     let peticion = Peticion() //variable para hacer la peticion a mi API
-    final let apiKey = ""
+    final let apiKey = "2582f2fd45cef92978ab9e5350ca79d2"
     let identificadorCell = "rowID"
     var storeArray : [ProductStore] = []
     let managerUbication = CLLocationManager()
@@ -168,7 +168,12 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     //........Metodo para ir a otra vista al hacer click en icono ubicacion.....//
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "UbicacionViewController", sender: indexPath)
+        if let latitudTienda = storeArray[(indexPath.row)].locations?.first?.lat,
+           let longitudTienda = storeArray[(indexPath.row)].locations?.first?.lng,
+            let nombreTienda = storeArray[(indexPath.row)].name{
+            let locationTienda = [latitudTienda,longitudTienda,nombreTienda] as [Any]
+            performSegue(withIdentifier: "UbicacionViewController", sender: locationTienda)
+        }
         
     }
     
@@ -219,14 +224,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     //.......Termina metodo que actualiza la ubicacion....//
 
     //.......Funcion para mandar parametros a  UbicacionViewController.........//
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selectedIndexPath = sender as? NSIndexPath
+        let selectedIndexPath = sender as? [Any]
         let ubicacionViewController = segue.destination as! UbicacionViewController
         ubicacionViewController.puntoLatitud = EULocationLatitud //storeArray[(selectedIndexPath?.row)!].website as! String
         ubicacionViewController.puntoLongitud = EULocationLongitud //storeArray[(selectedIndexPath?.row)!].name as! String
-        ubicacionViewController.latitudTienda = (storeArray[(selectedIndexPath?.row)!].locations?.first?.lat)!
-        ubicacionViewController.longitudTienda = (storeArray[(selectedIndexPath?.row)!].locations?.first?.lng)!
-        
+        ubicacionViewController.latitudTienda = selectedIndexPath![0] as! CLLocationDegrees
+        ubicacionViewController.longitudTienda = selectedIndexPath![1] as! CLLocationDegrees
+        ubicacionViewController.nombreTienda = selectedIndexPath![2] as! String
     }
     //.....Termina funcion para mandar parametros.........//
     
