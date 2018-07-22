@@ -57,7 +57,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         searchBar.delegate = self
         searchBar.placeholder = "Ingresa tu producto aquí..."
         searchBar.barStyle = UIBarStyle.default
-        searchBar.keyboardType = UIKeyboardType.alphabet
+        searchBar.keyboardType = UIKeyboardType.asciiCapable
         searchBar.layer.cornerRadius = 5.0
                 
     }
