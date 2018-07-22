@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "filename" : "destino.png",
+      "filename" : "icons8-marcador-30.png",
       "scale" : "1x"
     },
     {
       "idiom" : "iphone",
-      "filename" : "destino-1.png",
+      "filename" : "icons8-marcador-31.png",
       "scale" : "2x"
     },
     {
       "idiom" : "iphone",
-      "filename" : "destino-2.png",
+      "filename" : "icons8-marcador-32.png",
       "scale" : "3x"
     }
   ],

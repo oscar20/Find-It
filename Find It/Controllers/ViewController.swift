@@ -237,8 +237,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedIndexPath = sender as? NSIndexPath
         let ubicacionViewController = segue.destination as! UbicacionViewController
-        ubicacionViewController.miCadenaOrigen = String(EULocationLatitud) //storeArray[(selectedIndexPath?.row)!].website as! String
-        ubicacionViewController.miCadenaDestino = String(EULocationLongitud)  //storeArray[(selectedIndexPath?.row)!].name as! String
+        //ubicacionViewController.miCadenaOrigen = String(EULocationLatitud) //storeArray[(selectedIndexPath?.row)!].website as! String
+        //ubicacionViewController.miCadenaDestino = String(EULocationLongitud)  //storeArray[(selectedIndexPath?.row)!].name as! String
     }
     
 }

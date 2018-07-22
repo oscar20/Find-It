@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sqy-Es-6Vm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IFW-TP-yzc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -149,55 +149,9 @@
                     <view key="view" contentMode="scaleToFill" id="0PS-x2-BGD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELp-us-6gE">
-                                <rect key="frame" x="59" y="96" width="286" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconoOrigen" translatesAutoresizingMaskIntoConstraints="NO" id="UFb-Tu-QOX">
-                                <rect key="frame" x="34" y="99" width="15" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="OmC-NJ-fHm"/>
-                                    <constraint firstAttribute="width" constant="15" id="Y8W-yQ-geq"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconoDestino" translatesAutoresizingMaskIntoConstraints="NO" id="OpA-Ck-vdo">
-                                <rect key="frame" x="34" y="129" width="15" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="Vdo-3b-eup"/>
-                                    <constraint firstAttribute="width" constant="15" id="ffM-07-CgJ"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLX-RQ-iF8">
-                                <rect key="frame" x="59" y="126" width="286" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="AHB-6z-BZc" firstAttribute="trailing" secondItem="ELp-us-6gE" secondAttribute="trailing" constant="30" id="J6h-3n-UJ7"/>
-                            <constraint firstItem="AHB-6z-BZc" firstAttribute="trailing" secondItem="GLX-RQ-iF8" secondAttribute="trailing" constant="30" id="Ouq-Ja-gRV"/>
-                            <constraint firstItem="GLX-RQ-iF8" firstAttribute="leading" secondItem="OpA-Ck-vdo" secondAttribute="trailing" constant="10" id="Qqo-Ad-WIs"/>
-                            <constraint firstItem="ELp-us-6gE" firstAttribute="top" secondItem="AHB-6z-BZc" secondAttribute="top" constant="32" id="gjt-CG-BPi"/>
-                            <constraint firstItem="ELp-us-6gE" firstAttribute="leading" secondItem="UFb-Tu-QOX" secondAttribute="trailing" constant="10" id="oFb-rr-FeY"/>
-                            <constraint firstItem="UFb-Tu-QOX" firstAttribute="leading" secondItem="AHB-6z-BZc" secondAttribute="leading" constant="34" id="qPH-eg-SUk"/>
-                            <constraint firstItem="OpA-Ck-vdo" firstAttribute="top" secondItem="UFb-Tu-QOX" secondAttribute="bottom" constant="15" id="qzA-f9-dSM"/>
-                            <constraint firstItem="UFb-Tu-QOX" firstAttribute="top" secondItem="AHB-6z-BZc" secondAttribute="top" constant="35" id="tbl-Xq-d4N"/>
-                            <constraint firstItem="OpA-Ck-vdo" firstAttribute="leading" secondItem="AHB-6z-BZc" secondAttribute="leading" constant="34" id="vbN-jR-xNu"/>
-                            <constraint firstItem="GLX-RQ-iF8" firstAttribute="top" secondItem="ELp-us-6gE" secondAttribute="bottom" constant="9" id="z7a-ma-8rz"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AHB-6z-BZc"/>
                     </view>
-                    <connections>
-                        <outlet property="iconoDestino" destination="OpA-Ck-vdo" id="zh4-kY-d9e"/>
-                        <outlet property="iconoOrigen" destination="UFb-Tu-QOX" id="ytZ-h9-9ij"/>
-                        <outlet property="labelDestino" destination="GLX-RQ-iF8" id="wk0-Um-Jfs"/>
-                        <outlet property="labelOrigen" destination="ELp-us-6gE" id="dIz-JH-BuR"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rpq-oc-fSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -223,8 +177,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iconoDestino" width="256" height="256"/>
-        <image name="iconoOrigen" width="256" height="256"/>
         <image name="miFondoAzul" width="198" height="306"/>
     </resources>
 </document>
