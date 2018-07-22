@@ -87,7 +87,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "No se encontraron productos..", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "")]
             self.collectionView.reloadData()
         }else{
-            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=5&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
+            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=2&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
             let url = URL(string: urlString)
             print(urlString)
             Alamofire.request(url!).responseData{ (dataResponse) in
@@ -215,30 +215,19 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         print("EU LONGITUD ES: \(EULocationLongitud)")
         latitud = locationOscar.coordinate.latitude
         longitud = locationOscar.coordinate.longitude
-        
-        
-        /*CLGeocoder().reverseGeocodeLocation(locationOscar) { (place, error) in  //Para obtener la direccion dadas las coordenadas geograficas
-            if error != nil {
-                print("There is an error!!")
-                //print(error)
-            }else{
-                if let myplace = place?[0]{
-                    self.labelDireccion.text = "\(myplace.name!)"
-                    self.miLatitud = "\(myplace.name!) \(myplace.thoroughfare!) \(myplace.country!)"
-                    self.miLongitud = myplace.name!
-                }
-            }
-            
-        }*/
     }
     //.......Termina metodo que actualiza la ubicacion....//
 
-    
+    //.......Funcion para mandar parametros a  UbicacionViewController.........//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedIndexPath = sender as? NSIndexPath
         let ubicacionViewController = segue.destination as! UbicacionViewController
-        //ubicacionViewController.miCadenaOrigen = String(EULocationLatitud) //storeArray[(selectedIndexPath?.row)!].website as! String
-        //ubicacionViewController.miCadenaDestino = String(EULocationLongitud)  //storeArray[(selectedIndexPath?.row)!].name as! String
+        ubicacionViewController.puntoLatitud = EULocationLatitud //storeArray[(selectedIndexPath?.row)!].website as! String
+        ubicacionViewController.puntoLongitud = EULocationLongitud //storeArray[(selectedIndexPath?.row)!].name as! String
+        ubicacionViewController.latitudTienda = (storeArray[(selectedIndexPath?.row)!].locations?.first?.lat)!
+        ubicacionViewController.longitudTienda = (storeArray[(selectedIndexPath?.row)!].locations?.first?.lng)!
+        
     }
+    //.....Termina funcion para mandar parametros.........//
     
 }
