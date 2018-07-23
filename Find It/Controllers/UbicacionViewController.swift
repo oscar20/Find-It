@@ -12,7 +12,7 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-class UbicacionViewController: UIViewController, GMSMapViewDelegate{
+class UbicacionViewController: UIViewController{
     
     //..........Variables a considerar........//
     let keyMapa = "AIzaSyAGQ5i5gywzfdXwu0nTH21Eq3AmClqLyfw"
@@ -36,7 +36,7 @@ class UbicacionViewController: UIViewController, GMSMapViewDelegate{
         lbl.layer.masksToBounds = true
         lbl.layer.cornerRadius = CGFloat(5.0)
         lbl.layer.borderWidth = CGFloat(1.0)
-        lbl.layer.borderColor = UIColor.black.cgColor
+        lbl.layer.borderColor = UIColor(red: 39/255, green: 96/255, blue: 128/255, alpha: 1.0).cgColor
         return lbl
     }()
     
@@ -51,7 +51,7 @@ class UbicacionViewController: UIViewController, GMSMapViewDelegate{
         lbl.layer.masksToBounds = true
         lbl.layer.cornerRadius = CGFloat(5.0)
         lbl.layer.borderWidth = CGFloat(0.6)
-        lbl.layer.borderColor = UIColor.black.cgColor
+        lbl.layer.borderColor = UIColor(red: 39/255, green: 96/255, blue: 128/255, alpha: 1.0).cgColor
         return lbl
     }()
     
@@ -85,6 +85,7 @@ class UbicacionViewController: UIViewController, GMSMapViewDelegate{
         super.viewDidLoad()
         setupMapa()
         setupLayout()
+       
         print("LATITUD TIENDA ES: \(latitudTienda)")
         print("LONGITUD TIENDA ES: \(longitudTienda)")
     }
@@ -131,6 +132,7 @@ class UbicacionViewController: UIViewController, GMSMapViewDelegate{
         view.addSubview(imagenOrigen)
         view.addSubview(imagenDestino)
         view.addSubview(uiSegmentedControl)
+        
         imagenOrigen.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         imagenOrigen.centerYAnchor.constraint(equalTo: labelOrigen.centerYAnchor).isActive = true
         imagenDestino.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19).isActive = true
@@ -144,6 +146,7 @@ class UbicacionViewController: UIViewController, GMSMapViewDelegate{
         uiSegmentedControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
         uiSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         uiSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        
     }
     //..........Termina funcion de integracion de componentes.........//
     

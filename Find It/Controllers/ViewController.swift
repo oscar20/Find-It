@@ -19,7 +19,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     //.................Variable...............//
     let peticion = Peticion() //variable para hacer la peticion a mi API
-    final let apiKey = "2582f2fd45cef92978ab9e5350ca79d2"
+    final let apiKey = ""
     let identificadorCell = "rowID"
     var storeArray : [ProductStore] = []
     let managerUbication = CLLocationManager()
@@ -55,7 +55,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     //........Configuraciion de mi barra de busqueda..........//
     func searchBarSetup(){
         searchBar.delegate = self
-        searchBar.placeholder = "Ingresa tu producto aquí..."
+        searchBar.placeholder = "Search products..."
         searchBar.barStyle = UIBarStyle.default
         searchBar.keyboardType = UIKeyboardType.asciiCapable
         searchBar.layer.cornerRadius = 5.0
@@ -147,7 +147,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell.imagenProducto.layer.masksToBounds = true
             cell.imagenProducto.layer.cornerRadius = 5.0
             cell.imagenProducto.layer.borderWidth = 0.7
-            cell.imagenProducto.layer.borderColor = UIColor(red: 18/255, green: 113/255, blue: 115/255, alpha: 1.0).cgColor
+            cell.imagenProducto.layer.borderColor = UIColor(red: 39/255, green: 96/255, blue: 128/255, alpha: 1.0).cgColor
             cell.imagenProducto.contentMode = UIViewContentMode.scaleAspectFill
             cell.imagenProducto.image = imagenRecuperada
         }

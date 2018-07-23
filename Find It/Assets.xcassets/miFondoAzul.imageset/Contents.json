@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "filename" : "fondoAzul3.jpg",
+      "filename" : "fondoAzulVertical.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "iphone",
-      "filename" : "fondoAzul3-1.jpg",
+      "filename" : "fondoAzulVertical-1.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "iphone",
-      "filename" : "fondoAzul3-2.jpg",
+      "filename" : "fondoAzulVertical-2.jpg",
       "scale" : "3x"
     }
   ],

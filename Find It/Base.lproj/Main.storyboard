@@ -105,8 +105,8 @@
                                 <color key="barTintColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿Qué producto estás buscando?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOP-ya-lYW">
-                                <rect key="frame" x="78" y="79" width="219" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What are you looking for?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOP-ya-lYW">
+                                <rect key="frame" x="97" y="79" width="181" height="20"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                 <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -131,7 +131,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GN9-4V-CFb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Find It" id="wGU-HI-XAh"/>
+                    <navigationItem key="navigationItem" title="Find It" id="wGU-HI-XAh">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="F7J-Qx-0v3"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="YCY-Dg-Fbk" id="LP7-Hl-DzS"/>
                         <outlet property="searchBar" destination="tKU-Ht-J9s" id="kMW-Cz-r0Y"/>
