@@ -87,7 +87,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             storeArray = [ProductStore(id: nil, locations: nil, locations_found: nil, name: "No se encontraron productos..", products: miProductoVacio, products_found: nil, realtime_availability: nil, website: "")]
             self.collectionView.reloadData()
         }else{
-            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=40.714353&lng=-74.005973&radius=2&priceRange=30:120&apiKey=\(apiKey)" //Armo mi URL para la peticion.
+            let urlString = "https://api.goodzer.com/products/v0.1/search_stores/?query=\(formattingText)&lat=\(EULocationLatitud)&lng=\(EULocationLongitud)&radius=1.55343&priceRange=20:3000&apiKey=\(apiKey)" //Armo mi URL para la peticion.
             let url = URL(string: urlString)
             print(urlString)
             Alamofire.request(url!).responseData{ (dataResponse) in
@@ -139,6 +139,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.backgroundColor = UIColor.clear
+        cell.myLabel.numberOfLines = 2
+        cell.myLabel.lineBreakMode = .byWordWrapping
         cell.myLabel.text = storeArray[indexPath.row].products?.first?.title
         cell.webSite.text = storeArray[indexPath.row].name
         
