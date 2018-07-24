@@ -139,6 +139,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.backgroundColor = UIColor.clear
+        
         cell.myLabel.numberOfLines = 2
         cell.myLabel.lineBreakMode = .byWordWrapping
         cell.myLabel.text = storeArray[indexPath.row].products?.first?.title
@@ -153,7 +154,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell.imagenProducto.contentMode = UIViewContentMode.scaleAspectFill
             cell.imagenProducto.image = imagenRecuperada
         }
-        cell.imagenUbicacion.image = UIImage(named: "ubicacion2")
+        //cell.imagenUbicacion.image = UIImage(named: "ubicacion2")
         cell.precioLabel.text = "$\(String(format: "%.2f", (storeArray[indexPath.row].products?.first?.price)!))"
         return cell
     }
@@ -167,19 +168,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     //....Termina metodo de diseño de collection View....//
     
-    //........Metodo para ir a otra vista al hacer click en icono ubicacion.....//
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let latitudTienda = storeArray[(indexPath.row)].locations?.first?.lat,
-           let longitudTienda = storeArray[(indexPath.row)].locations?.first?.lng,
-            let nombreTienda = storeArray[(indexPath.row)].name{
-            let locationTienda = [latitudTienda,longitudTienda,nombreTienda] as [Any]
-            performSegue(withIdentifier: "UbicacionViewController", sender: locationTienda)
-        }
-        
-    }
     
-    //..Termina Metodo para ir a otra vista al hacer click en icono ubicacion.....//
     
     //.......Inicia funcion para obtener imagen con URL.......//
     func obtenerImagenConURL(objetoStore : Product, completionHandler: @escaping (UIImage?, Error?) -> () ){
@@ -225,17 +214,56 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     //.......Termina metodo que actualiza la ubicacion....//
 
+    //........Metodo para ir a otra vista al hacer click en icono ubicacion.....//
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let _ = storeArray[(indexPath.row)].locations?.first?.lat,
+            let _ = storeArray[(indexPath.row)].locations?.first?.lng,
+            let _ = storeArray[(indexPath.row)].name{
+            //##let locationTienda = [latitudTienda,longitudTienda,nombreTienda] as [Any]
+            let datosCelda = storeArray[indexPath.row]
+            performSegue(withIdentifier: "detalleSegue", sender: datosCelda /*locationTienda*/)
+        }
+        
+    }
+    
+    //..Termina Metodo para ir a otra vista al hacer click en icono ubicacion.....//
+    
     //.......Funcion para mandar parametros a  UbicacionViewController.........//
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selectedIndexPath = sender as? [Any]
-        let ubicacionViewController = segue.destination as! UbicacionViewController
-        ubicacionViewController.puntoLatitud = EULocationLatitud //storeArray[(selectedIndexPath?.row)!].website as! String
-        ubicacionViewController.puntoLongitud = EULocationLongitud //storeArray[(selectedIndexPath?.row)!].name as! String
-        ubicacionViewController.latitudTienda = selectedIndexPath![0] as! CLLocationDegrees
-        ubicacionViewController.longitudTienda = selectedIndexPath![1] as! CLLocationDegrees
-        ubicacionViewController.nombreTienda = selectedIndexPath![2] as! String
+        let selectedIndexPath = sender as? ProductStore
+        let detalleViewController = segue.destination as! DetalleProductoViewController
+        detalleViewController.puntoLatitud = EULocationLatitud
+        detalleViewController.puntoLongitud = EULocationLongitud
+        detalleViewController.latitudTienda = (selectedIndexPath?.locations?.first?.lat)!   //selectedIndexPath![0] as! CLLocationDegrees
+        detalleViewController.longitudTienda = (selectedIndexPath?.locations?.first?.lng)! //selectedIndexPath![1] as! CLLocationDegrees
+        
+        detalleViewController.nombreMiTienda = (selectedIndexPath?.name)!
+        detalleViewController.MiwebSite = (selectedIndexPath?.website)!
+        detalleViewController.nombreMiProducto = (selectedIndexPath?.products?.first?.title)!
+        detalleViewController.precioMiProducto = (selectedIndexPath?.products?.first?.price)!
     }
     //.....Termina funcion para mandar parametros.........//
+    
+    //.........Funcion para mandar error de ubicacion..........//
+    
+    /*func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("El error de ubicacion es: \(error)")
+        /*if let clErr = error as? CLError {
+            switch clErr {
+            case CLError.locationUnknown:
+                print("location unknown")
+            case CLError.denied:
+                print("denied")
+            default:
+                print("other Core Location error")
+            }
+        } else {
+            print("other error:", error.localizedDescription)
+        }*/
+    }*/
+    
+    //.......Termina funcion para revisar status de conexion....//
     
 }

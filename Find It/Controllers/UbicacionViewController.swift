@@ -15,7 +15,7 @@ import SwiftyJSON
 class UbicacionViewController: UIViewController{
     
     //..........Variables a considerar........//
-    let keyMapa = "AIzaSyAGQ5i5gywzfdXwu0nTH21Eq3AmClqLyfw"
+    let keyMapa = ""
     var puntoLatitud = CLLocationDegrees()
     var puntoLongitud = CLLocationDegrees()
     var latitudTienda = CLLocationDegrees()
@@ -73,7 +73,7 @@ class UbicacionViewController: UIViewController{
         let segmented = UISegmentedControl(items: [UIImage(named: "coche")!,UIImage(named: "bici")!,UIImage(named: "caminar")!])
         segmented.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         segmented.tintColor = UIColor(red: 39/255, green: 96/255, blue: 128/255, alpha: 1.0)
-        segmented.selectedSegmentIndex = 0
+        //segmented.selectedSegmentIndex = 0
         segmented.translatesAutoresizingMaskIntoConstraints = false
         segmented.addTarget(self, action: #selector(mapTypeChanged), for: .valueChanged)
         return segmented
@@ -154,11 +154,11 @@ class UbicacionViewController: UIViewController{
     func setupMapa(){
         
         let coordenadaTienda = CLLocationCoordinate2DMake(latitudTienda, longitudTienda)
-        let cameraTienda = GMSCameraPosition.camera(withTarget: coordenadaTienda, zoom: 15.0)
+        let cameraTienda = GMSCameraPosition.camera(withTarget: coordenadaTienda, zoom: 17.0)
         mapView = GMSMapView.map(withFrame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), camera: cameraTienda)
+        mapView.setMinZoom(14.5, maxZoom: 25.0)
         view = mapView
         setupMarkersMap() //Llamado a funcion para pintar markers en mapa
-        obtenerRuta(mapa: mapView, mode: "driving")
     }
     //...........Termina funcion para pintar mapa .......//
     
