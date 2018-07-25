@@ -73,7 +73,6 @@ class UbicacionViewController: UIViewController{
         let segmented = UISegmentedControl(items: [UIImage(named: "coche")!,UIImage(named: "bici")!,UIImage(named: "caminar")!])
         segmented.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         segmented.tintColor = UIColor(red: 39/255, green: 96/255, blue: 128/255, alpha: 1.0)
-        //segmented.selectedSegmentIndex = 0
         segmented.translatesAutoresizingMaskIntoConstraints = false
         segmented.addTarget(self, action: #selector(mapTypeChanged), for: .valueChanged)
         return segmented

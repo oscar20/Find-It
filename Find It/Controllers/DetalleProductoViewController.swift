@@ -22,11 +22,13 @@ class DetalleProductoViewController: UIViewController {
     var latitudTienda = CLLocationDegrees()
     var longitudTienda = CLLocationDegrees()
     
-    var imagenMProducto = UIImageView()
+    var imagenMiProducto : Product? 
     var nombreMiProducto = String()
     var precioMiProducto = Double()
     var MiwebSite = String()
     var nombreMiTienda = String()
+    
+    var instanciaURLImagen = URLImagen()
 
     @IBOutlet weak var botonMapa: UIButton!
     
@@ -34,12 +36,15 @@ class DetalleProductoViewController: UIViewController {
         super.viewDidLoad()
         nombreProducto.text = nombreMiProducto
         precioProducto.text =  "$ \(String(precioMiProducto))"
-        tienda.text = "Tienda: \(nombreMiTienda)"
+        tienda.text = "Store: \(nombreMiTienda)"
         webSite.text = "Web Site: \(MiwebSite)"
         botonMapa.backgroundColor = UIColor.clear
         botonMapa.layer.cornerRadius = 5.0
         botonMapa.layer.borderWidth = 0.8
         botonMapa.layer.borderColor = UIColor.gray.cgColor
+        instanciaURLImagen.obtenerImagenConURL(objetoStore: imagenMiProducto!) { (imagen, error) in
+            self.imagenProducto.image = imagen
+        }
     }
     
     
@@ -57,16 +62,4 @@ class DetalleProductoViewController: UIViewController {
         ubicacionViewController.longitudTienda = longitudTienda
         ubicacionViewController.nombreTienda = nombreMiTienda
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -35,6 +35,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     var longitud : Double = Double()
     var temporalLatitud : Double = Double()
     var temporalLongitud : Double = Double()
+    //-----
+    var instanciaURLImagen = URLImagen()
     
     //............Terminan variables.........//
 
@@ -139,13 +141,13 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.backgroundColor = UIColor.clear
-        
         cell.myLabel.numberOfLines = 2
         cell.myLabel.lineBreakMode = .byWordWrapping
         cell.myLabel.text = storeArray[indexPath.row].products?.first?.title
         cell.webSite.text = storeArray[indexPath.row].name
         
-        obtenerImagenConURL(objetoStore: (storeArray[indexPath.row].products?.first)!){ (imagenRecuperada, error) in
+        
+        instanciaURLImagen.obtenerImagenConURL(objetoStore: (storeArray[indexPath.row].products?.first)!){ (imagenRecuperada, error) in
             cell.imagenProducto.backgroundColor = UIColor.clear
             cell.imagenProducto.layer.masksToBounds = true
             cell.imagenProducto.layer.cornerRadius = 5.0
@@ -243,6 +245,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         detalleViewController.MiwebSite = (selectedIndexPath?.website)!
         detalleViewController.nombreMiProducto = (selectedIndexPath?.products?.first?.title)!
         detalleViewController.precioMiProducto = (selectedIndexPath?.products?.first?.price)!
+        detalleViewController.imagenMiProducto = (selectedIndexPath?.products?.first)!
     }
     //.....Termina funcion para mandar parametros.........//
     
