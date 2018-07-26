@@ -37,14 +37,16 @@ class DetalleProductoViewController: UIViewController {
         nombreProducto.text = nombreMiProducto
         precioProducto.text =  "$ \(String(precioMiProducto))"
         tienda.text = "Store: \(nombreMiTienda)"
-        webSite.text = "Web Site: \(MiwebSite)"
+        webSite.text = "Website: \(MiwebSite)"
         botonMapa.backgroundColor = UIColor.clear
-        botonMapa.layer.cornerRadius = 5.0
-        botonMapa.layer.borderWidth = 0.8
-        botonMapa.layer.borderColor = UIColor.gray.cgColor
+        botonMapa.layer.cornerRadius = 7.0
+        botonMapa.backgroundColor = UIColor(red: 69/255, green: 123/255, blue: 157/255, alpha: 1.0)
         instanciaURLImagen.obtenerImagenConURL(objetoStore: imagenMiProducto!) { (imagen, error) in
             self.imagenProducto.image = imagen
+            self.imagenProducto.layer.masksToBounds = true
         }
+        self.imagenProducto.layer.masksToBounds = true
+        self.imagenProducto.layer.cornerRadius = 18.0
     }
     
     
