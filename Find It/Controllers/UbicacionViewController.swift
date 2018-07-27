@@ -14,6 +14,7 @@ import SwiftyJSON
 
 class UbicacionViewController: UIViewController{
     
+    
     //..........Variables a considerar........//
     let keyMapa = ""
     var puntoLatitud = CLLocationDegrees()
@@ -59,6 +60,7 @@ class UbicacionViewController: UIViewController{
        let imagenOrigen = UIImageView()
         imagenOrigen.image = UIImage(named: "iconoOrigen")
         imagenOrigen.translatesAutoresizingMaskIntoConstraints = false
+        imagenOrigen.layer.cornerRadius = 5.0
         return imagenOrigen
     }()
     
@@ -76,6 +78,14 @@ class UbicacionViewController: UIViewController{
         segmented.translatesAutoresizingMaskIntoConstraints = false
         segmented.addTarget(self, action: #selector(mapTypeChanged), for: .valueChanged)
         return segmented
+    }()
+    
+    let imageView : UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = UIColor(red: 241/255, green: 250/255, blue: 238/255, alpha: 1.0)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.layer.cornerRadius = 4.0
+        return image
     }()
     //..........Terminan elementos de interfaz.........//
     
@@ -107,7 +117,7 @@ class UbicacionViewController: UIViewController{
                 //print(error)
             }else{
                 if let myplace = place?[0]{
-                    self.labelOrigen.text = " \(myplace.thoroughfare!) \(myplace.subThoroughfare!), \(myplace.subLocality!), \(myplace.postalCode!) \(myplace.locality!), \(myplace.isoCountryCode!) "
+                    self.labelOrigen.text = " \(myplace.thoroughfare!) \(myplace.subThoroughfare!), \(myplace.subLocality!), \(myplace.locality!)"
                 }
             }
         }
@@ -116,7 +126,7 @@ class UbicacionViewController: UIViewController{
                 print("There is an error!!")
             }else{
                 if let myplace = place?[0]{
-                    self.labelDestino.text = " \(myplace.thoroughfare!) \(myplace.subThoroughfare!), \(myplace.subLocality!), \(myplace.postalCode!) \(myplace.locality!), \(myplace.isoCountryCode!) "
+                    self.labelDestino.text = " \(myplace.thoroughfare!) \(myplace.subThoroughfare!), \(myplace.subLocality!), \(myplace.locality!)"
                 }
             }
         }
@@ -126,22 +136,36 @@ class UbicacionViewController: UIViewController{
     //.........Funcion para integrar componenes de vista...........//
     func setupLayout(){
         
+        view.addSubview(imageView)
         view.addSubview(labelOrigen)
         view.addSubview(labelDestino)
         view.addSubview(imagenOrigen)
         view.addSubview(imagenDestino)
         view.addSubview(uiSegmentedControl)
         
-        imagenOrigen.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: labelDestino.bottomAnchor, constant: 5).isActive = true
+        
+        imagenOrigen.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         imagenOrigen.centerYAnchor.constraint(equalTo: labelOrigen.centerYAnchor).isActive = true
-        imagenDestino.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19).isActive = true
+        imagenOrigen.widthAnchor.constraint(equalToConstant: 17.0).isActive = true
+        imagenOrigen.heightAnchor.constraint(equalToConstant: 17.0).isActive = true
+        
+        imagenDestino.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 9).isActive = true
         imagenDestino.centerYAnchor.constraint(equalTo: labelDestino.centerYAnchor).isActive = true
-        labelOrigen.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
-        labelOrigen.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        labelOrigen.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
+        imagenDestino.widthAnchor.constraint(equalToConstant: 17.0).isActive = true
+        imagenDestino.heightAnchor.constraint(equalToConstant: 17.0).isActive = true
+        
+        labelOrigen.topAnchor.constraint(equalTo: view.topAnchor, constant: 66).isActive = true
+        labelOrigen.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        labelOrigen.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35).isActive = true
+        
         labelDestino.topAnchor.constraint(equalTo: labelOrigen.bottomAnchor, constant: 10).isActive = true
-        labelDestino.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 40).isActive = true
-        labelDestino.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        labelDestino.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 35).isActive = true
+        labelDestino.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        
         uiSegmentedControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
         uiSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         uiSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
@@ -152,10 +176,10 @@ class UbicacionViewController: UIViewController{
     //..............Funcion para pintar mapa............//
     func setupMapa(){
         
-        let coordenadaTienda = CLLocationCoordinate2DMake(latitudTienda, longitudTienda)
-        let cameraTienda = GMSCameraPosition.camera(withTarget: coordenadaTienda, zoom: 17.0)
+        let cameraTienda = GMSCameraPosition.camera(withLatitude: latitudTienda, longitude: longitudTienda, zoom: 17, bearing: 10, viewingAngle: 5)
         mapView = GMSMapView.map(withFrame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), camera: cameraTienda)
-        mapView.setMinZoom(14.5, maxZoom: 25.0)
+        
+        mapView.setMinZoom(10.0, maxZoom: 20.0)
         view = mapView
         setupMarkersMap() //Llamado a funcion para pintar markers en mapa
     }

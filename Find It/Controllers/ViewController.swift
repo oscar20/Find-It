@@ -37,6 +37,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     var temporalLongitud : Double = Double()
     //-----
     var instanciaURLImagen = URLImagen()
+    let disponibilidad = ["Disponible","No disponible"]
     
     //............Terminan variables.........//
 
@@ -80,7 +81,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         storeArray = []
-        let miProductoVacio = [Product(id: nil, image: nil, original_price: nil, price: 0.00, title: nil, url: nil)]
+        let miProductoVacio = [Product(id: nil, image: nil, original_price: nil, price: 0, title: nil, url: nil)]
         let textSearchBar = searchText
         let textSearchBar_trimmed  = textSearchBar.trimmingCharacters(in: .whitespaces) //Recorto la cadena.
         let formattingText = textSearchBar_trimmed.replacingOccurrences(of: " ", with: "+") //Reemplazando espacios en blanco.
@@ -156,8 +157,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell.imagenProducto.contentMode = UIViewContentMode.scaleAspectFill
             cell.imagenProducto.image = imagenRecuperada
         }
-        //cell.imagenUbicacion.image = UIImage(named: "ubicacion2")
-        cell.precioLabel.text = "$\(String(format: "%.2f", (storeArray[indexPath.row].products?.first?.price)!))"
+        if ((storeArray[indexPath.row].products?.first?.price)!) != 0 {
+            cell.precioLabel.text = "$\(String(format: "%.2f", (storeArray[indexPath.row].products?.first?.price)!))"
+        }else{
+            cell.precioLabel.text = " "
+        }
         return cell
     }
     //.......Terminan metodos de collection View....//

@@ -29,6 +29,8 @@ class DetalleProductoViewController: UIViewController {
     var nombreMiTienda = String()
     
     var instanciaURLImagen = URLImagen()
+    
+   
 
     @IBOutlet weak var botonMapa: UIButton!
     
@@ -47,6 +49,7 @@ class DetalleProductoViewController: UIViewController {
         }
         self.imagenProducto.layer.masksToBounds = true
         self.imagenProducto.layer.cornerRadius = 18.0
+        
     }
     
     
